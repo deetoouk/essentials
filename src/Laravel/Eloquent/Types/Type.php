@@ -20,6 +20,11 @@ abstract class Type
     public $default;
 
     /**
+     * @var bool
+     */
+    public $has_default = false;
+
+    /**
      * @param bool $nullable
      *
      * @return $this
@@ -27,6 +32,8 @@ abstract class Type
     public function nullable(boolean $nullable = true)
     {
         $this->nullable = $nullable;
+
+        $this->default(null);
 
         return $this;
     }
@@ -38,7 +45,8 @@ abstract class Type
      */
     public function default(mixed $default)
     {
-        $this->default = $default;
+        $this->default     = $default;
+        $this->has_default = true;
 
         return $this;
     }
