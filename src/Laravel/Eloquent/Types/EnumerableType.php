@@ -15,6 +15,18 @@ class EnumerableType extends Type
     public $values;
 
     /**
+     * EnumerableType constructor.
+     *
+     * @param array|null $values
+     */
+    public function __construct(array $values = null)
+    {
+        if ($values) {
+            $this->values($values);
+        }
+    }
+
+    /**
      * @param array $values
      *
      * @return $this
