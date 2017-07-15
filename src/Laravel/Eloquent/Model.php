@@ -28,26 +28,6 @@ abstract class Model extends LaravelModel
     public $validates = true;
 
     /**
-     * @var array
-     */
-    protected $defaults = [];
-
-    /**
-     * @var array
-     */
-    protected $nullable = [];
-
-    /**
-     * @var array
-     */
-    protected $enumerable = [];
-
-    /**
-     * @var array
-     */
-    protected $types = [];
-
-    /**
      * Base constructor.
      *
      * @param array $attributes
@@ -61,12 +41,6 @@ abstract class Model extends LaravelModel
 
             if (method_exists($this, $initMethod)) {
                 $this->{$initMethod}();
-            }
-        }
-
-        foreach ($this->nullable as $parameter) {
-            if (!isset($this->defaults[$parameter])) {
-                $this->defaults[$parameter] = null;
             }
         }
 
@@ -87,36 +61,6 @@ abstract class Model extends LaravelModel
         parent::__construct($attributes);
 
         $this->fireModelEvent('constructed', false);
-    }
-
-    /**
-     * @param bool $base_names
-     *
-     * @return array
-     */
-    public function getTypes(bool $base_names = false)
-    {
-        $types = $this->types;
-
-        if ($this->timestamps) {
-            $types['updated_at'] = 'datetime';
-            $types['created_at'] = 'datetime';
-        }
-
-        ksort($types);
-
-        if ($base_names) {
-            foreach ($types as $key => $type) {
-                if (is_subclass_of($type, ValueObject::class) ||
-                    $type === Model::class ||
-                    is_subclass_of($type, Model::class)
-                ) {
-                    $types[$key] = class_basename($type);
-                }
-            }
-        }
-
-        return $types;
     }
 
     /**
@@ -181,32 +125,6 @@ abstract class Model extends LaravelModel
     }
 
     /**
-     * @param string $field Field to return enumerable list for
-     *
-     * @return array
-     */
-    public function getEnumerable($field = null)
-    {
-        if ($field) {
-            if (isset($this->enumerable[$field])) {
-                return $this->enumerable[$field];
-            } else {
-                throw new Error('":field" is not enumerable field', compact('field'));
-            }
-        }
-
-        return $this->enumerable;
-    }
-
-    /**
-     * @return array
-     */
-    public function getNullable()
-    {
-        return $this->nullable;
-    }
-
-    /**
      * @param $field
      *
      * @return bool
@@ -214,14 +132,6 @@ abstract class Model extends LaravelModel
     public function isNullable(string $field): bool
     {
         return in_array($field, $this->nullable);
-    }
-
-    /**
-     * @return array
-     */
-    public function getDefaults()
-    {
-        return $this->defaults;
     }
 
     /**
@@ -312,14 +222,6 @@ abstract class Model extends LaravelModel
         }
 
         parent::setAttribute($key, $value);
-    }
-
-    /**
-     * @return array
-     */
-    public function getCasts()
-    {
-        return parent::getCasts();
     }
 
     /**
@@ -541,10 +443,16 @@ abstract class Model extends LaravelModel
      */
     public function save(array $options = [])
     {
-        foreach ($this->defaults as $key => $value) {
-            if (!array_key_exists($key, $this->attributes)) {
-                $this->attributes[$key] = $value;
+        foreach ($this->type as $field => $type) {
+            if (!$type->has_default) {
+                continue;
             }
+
+            if (array_key_exists($field, $this->attributes)) {
+                continue;
+            }
+
+            $this->attributes[$field] = $type->default;
         }
 
         return parent::save($options);
@@ -560,16 +468,6 @@ abstract class Model extends LaravelModel
     }
 
     /**
-     * @param int $options
-     *
-     * @return string
-     */
-    public function toJson($options = 0)
-    {
-        return parent::toJson(JSON_HEX_AMP);
-    }
-
-    /**
      * Create a new LiveBuzz Eloquent Collection instance.
      *
      * @param  array $models
@@ -579,25 +477,6 @@ abstract class Model extends LaravelModel
     public function newCollection(array $models = [])
     {
         return new Collection($models);
-    }
-
-    /**
-     * Overrides default Laravel Functionality so we can trigger
-     * extra events that we need for flow processing
-     * Perform a model update operation.
-     *
-     * @param  Builder $query
-     * @param  array   $options
-     *
-     * @return bool|null
-     */
-    protected function performUpdate(Builder $query, array $options = [])
-    {
-        $model = parent::performUpdate($query, $options);
-
-        $this->fireModelEvent('buzzUpdated', false);
-
-        return $model;
     }
 
     /**
