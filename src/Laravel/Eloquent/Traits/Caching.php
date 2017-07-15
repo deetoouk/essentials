@@ -11,13 +11,13 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  */
 trait Caching
 {
-    /** @var int cache time */
-    protected $cache_time = 15;
-
     /**
      * @var string
      */
     protected static $cache_prefix = '';
+
+    /** @var int cache time */
+    protected $cache_time = 15;
 
     /**
      * Boots the trait
