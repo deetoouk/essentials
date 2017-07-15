@@ -17,7 +17,7 @@ class StringType extends Type
     /**
      * @var integer
      */
-    public $max;
+    public $max = 255;
 
     /**
      * @param int $max
