@@ -2,6 +2,7 @@
 
 namespace JordanDobrev\Essentials\Laravel\Eloquent\Types;
 
+use JordanDobrev\Essentials\Exceptions\Error;
 use JordanDobrev\Essentials\Exceptions\Fatal;
 use JordanDobrev\Essentials\ValueObjects\ValueObject;
 
@@ -33,5 +34,28 @@ class ValueObjectType extends Type
         }
 
         $this->valueObject = $valueObject;
+    }
+
+    public function validate($attribute, $value)
+    {
+        if (!($value instanceof $this->valueObject)) {
+            throw new Error(':attribute must be an instance of ' . $this->valueObject);
+        }
+    }
+
+    public function cast($value)
+    {
+        $object = $this->valueObject;
+
+        if ($value instanceof $object) {
+            return $value;
+        }
+
+        return new $object($value);
+    }
+
+    public function toPrimitive($value)
+    {
+        return $value->toPrimitive();
     }
 }

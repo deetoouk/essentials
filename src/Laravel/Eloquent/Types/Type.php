@@ -50,4 +50,16 @@ abstract class Type
 
         return $this;
     }
+
+    abstract function validate($attribute, $value);
+
+    public function cast($value)
+    {
+        return $value;
+    }
+
+    public function toPrimitive($value)
+    {
+        return $value;
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace JordanDobrev\Essentials\Laravel\Eloquent\Types;
 
+use JordanDobrev\Essentials\Exceptions\Error;
+
 /**
  * Class EnumerableType
  *
@@ -36,5 +38,12 @@ class EnumerableType extends Type
         $this->values = $values;
 
         return $this;
+    }
+
+    function validate($attribute, $value)
+    {
+        if (!in_array($value, $this->values)) {
+            throw new Error(':attribute has an invalid value');
+        }
     }
 }

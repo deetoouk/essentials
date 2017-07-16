@@ -2,6 +2,8 @@
 
 namespace JordanDobrev\Essentials\Laravel\Eloquent\Types;
 
+use JordanDobrev\Essentials\Exceptions\Error;
+
 /**
  * Class IntegerType
  *
@@ -58,5 +60,21 @@ class IntegerType extends Type
         $this->min = $min;
 
         return $this;
+    }
+
+    function validate($attribute, $value)
+    {
+        if (!filter_var($value, FILTER_VALIDATE_INT)) {
+            throw new Error(':attribute must be an integer');
+        }
+    }
+
+    public function cast($value)
+    {
+        if (is_int($value)) {
+            return $value;
+        }
+
+        return intval($value);
     }
 }

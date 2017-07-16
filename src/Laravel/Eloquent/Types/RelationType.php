@@ -3,6 +3,7 @@
 namespace JordanDobrev\Essentials\Laravel\Eloquent\Types;
 
 use Illuminate\Database\Eloquent\Model;
+use JordanDobrev\Essentials\Exceptions\Error;
 use JordanDobrev\Essentials\Exceptions\Fatal;
 
 /**
@@ -33,5 +34,18 @@ class RelationType extends Type
         }
 
         $this->relation = $relation;
+    }
+
+    function validate($attribute, $value)
+    {
+        if (!($value instanceof $this->relation)) {
+            throw new Error(':attribute must be an instance of ' . $this->relation);
+        }
+
+        $exists = (new $this->relation)->whereId($value)->exists();
+
+        if (!$exists) {
+            throw new Error(':attribute relation #:value does not exist', compact('attribute', 'value'));
+        }
     }
 }

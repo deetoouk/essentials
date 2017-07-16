@@ -2,6 +2,8 @@
 
 namespace JordanDobrev\Essentials\Laravel\Eloquent\Types;
 
+use JordanDobrev\Essentials\Exceptions\Error;
+
 /**
  * Class TextType
  *
@@ -41,5 +43,12 @@ class TextType extends Type
         $this->min = $min;
 
         return $this;
+    }
+
+    function validate($attribute, $value)
+    {
+        if (!is_string($value)) {
+            throw new Error(':attribute must be a string');
+        }
     }
 }

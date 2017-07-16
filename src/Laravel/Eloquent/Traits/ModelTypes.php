@@ -1,6 +1,9 @@
 <?php namespace JordanDobrev\Essentials\Laravel\Eloquent\Traits;
 
+use JordanDobrev\Essentials\Exceptions\Error;
 use JordanDobrev\Essentials\Laravel\Eloquent\Types\DateTimeType;
+use JordanDobrev\Essentials\Laravel\Eloquent\Types\DateType;
+use JordanDobrev\Essentials\ValueObjects\ValueObject;
 
 /**
  * Class ModelTypes
@@ -9,6 +12,11 @@ use JordanDobrev\Essentials\Laravel\Eloquent\Types\DateTimeType;
  */
 trait ModelTypes
 {
+    /**
+     * @var bool
+     */
+    public $validates = true;
+
     /**
      * @var array
      */
@@ -21,10 +29,12 @@ trait ModelTypes
      */
     public static function bootModelTypes()
     {
-        static::creating(function ($model) {
-            if (!$model->id) {
-                $model->id = $model->generateUuid();
+        static::saving(function ($model) {
+            if (!$model->validates) {
+                return;
             }
+
+            $model->validate();
         });
     }
 
@@ -39,6 +49,20 @@ trait ModelTypes
             $types['updated_at'] = new DateTimeType();
             $types['created_at'] = new DateTimeType();
         }
+
+        foreach ($this->types as $attribute => $type) {
+            if (!in_array($attribute, $this->guarded)) {
+                $this->fillable[] = $attribute;
+            }
+
+            if (($type instanceof DateTimeType || $type instanceof DateType) &&
+                !in_array($attribute, $this->getDates())
+            ) {
+                $this->dates[] = $attribute;
+            }
+        }
+
+        $this->guarded = null;
     }
 
     /**
@@ -61,114 +85,25 @@ trait ModelTypes
 
     /**
      * @return $this
+     * @throws Error
      */
     public function validate()
     {
-        if ($this->types) {//validate casts
-            $rules       = [];
-            $customRules = $this->getRules();
+        $types = array_except($this->types, ['id']);
 
-            $types = array_except($this->types, ['id']);
+        foreach ($types as $attribute => $type) {
+            $value = $this->attributes[$attribute] ?? null;
 
-            foreach ($types as $field => $type) {
-                if ($type->nullable) {
-                    $rules[$field] = 'nullable';
-                } elseif ($type->has_default) {
-                    $rules[$field] = 'sometimes|required';
-                } else {
-                    $rules[$field] = 'required';
+            if (is_null($value)) {
+                if (!$type->nullable && !$type->has_default) {
+                    throw new Error(':attribute is required');
                 }
 
-                if (!empty($customRules[$field])) {
-                    $rules[$field] .= '|' . $customRules[$field];
-                    unset($customRules[$field]);
-                }
-
-                if ($type == 'int') {
-                    $cast_rule = 'integer';
-                } elseif ($type == 'unsignedInteger') {
-                    $cast_rule = 'integer|min:0';
-                } elseif ($type == 'microtime') {
-                    $cast_rule = 'integer|min:0';
-                } elseif ($type == 'uuid') {
-                    $cast_rule = 'string|utf8_string|size:36';
-                } elseif ($type == 'id') {
-                    $cast_rule = 'integer|min:1';
-                } elseif ($type == 'datetime') {
-                    $cast_rule = 'date';
-                } elseif ($type == 'string') {
-                    $cast_rule = 'string|utf8_string|max:255';
-                } elseif ($type == 'text') {
-                    $cast_rule = 'string|utf8_string';
-                } elseif ($type == 'enumerable') {
-                    $cast_rule = 'string|utf8_string';
-                } elseif ($type == 'boolean') {
-                    $cast_rule = 'boolean';
-                } else {
-                    $cast_rule = $type;
-                }
-
-                if (in_array($field, $this->nullable)) {
-                    $rules[$field] = 'nullable|' . $cast_rule;
-                } elseif (isset($this->defaults[$field])) {
-                    $rules[$field] = 'sometimes|required|' . $cast_rule;
-                } else {
-                    $rules[$field] = 'required|' . $cast_rule;
-                }
-
-                if (isset($this->enumerable[$field])) {
-                    $rules[$field] .= '|in:' . implode(',', $this->enumerable[$field]);
-                }
-
-                if (in_array($field, ['created_at', 'updated_at'])) {
-                    $rules[$field] .= '|sometimes';
-                }
-
-                if (!empty($customRules[$field])) {
-                    $rules[$field] .= '|' . $customRules[$field];
-                    unset($customRules[$field]);
-                }
+                continue;
             }
 
-            $rules = array_merge($rules, $customRules);
-
-            $attributes = $this->attributesToArray();
-            //add hidden because attributes to array skips them
-            foreach ($this->hidden as $hidden) {
-                $attributes[$hidden] = $this->{$hidden};
-            }
-
-            validate($attributes, $rules);
-
-            //validate fk
-            foreach ($this->types as $field => $type) {
-                //only validate dirty data!
-                if (!$this->isDirty($field)) {
-                    continue;
-                }
-
-                if (!$this->{$field}) {
-                    continue;
-                }
-
-                if (!is_subclass_of($type, Model::class) && $type !== Model::class) {
-                    continue;
-                }
-
-                $relation = camel_case(Str::replaceLast('_id', '', $field));
-
-                $exists = $this->{$relation}()->exists();
-
-                if (!$exists) {
-                    throw new Error(
-                        ":model relation ':relation' not found for id '#:id'!",
-                        [
-                            'model'    => class_basename($this),
-                            'relation' => $relation,
-                            'id'       => $this->{$field},
-                        ]
-                    );
-                }
+            if ($this->isDirty($attribute)) {
+                $type->validate($attribute, $value);
             }
         }
 
@@ -176,10 +111,140 @@ trait ModelTypes
     }
 
     /**
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @return mixed
+     */
+    public function castAttribute($key, $value)
+    {
+        if (is_null($value)) {
+            return $value;
+        }
+
+        $type = $this->types[$key] ?? null;
+
+        return $type->cast($value);
+    }
+
+    /**
+     * Set a given attribute on the model.
+     *
+     * @param  string $key
+     * @param  mixed  $value
+     *
+     * @return void
+     */
+    public function setAttribute($key, $value)
+    {
+        if (is_scalar($value)) {
+            if (is_string($value)) {
+                $value = trim($value);
+            }
+
+            if ($value === '') {
+                $value = null;
+            }
+        }
+
+        if (is_null($value)) {
+            return parent::setAttribute($key, $value);
+        }
+
+        $type = $this->types[$key] ?? null;
+
+        if (!$type) {
+            return parent::setAttribute($key, $value);
+        }
+
+        if (!$this->hasSetMutator($key)) {
+            $value = $type->toPrimitive($type->cast($value));
+
+            assert(is_scalar($value), 'Primitive value is not a scalar value!');
+        }
+
+        return parent::setAttribute($key, $value);
+    }
+
+    /**
+     * @param $field
+     *
+     * @return bool
+     */
+    public function hasType($field): bool
+    {
+        return isset($this->types[$field]);
+    }
+
+    /**
+     * @param $field
+     *
+     * @return mixed|null
+     */
+    public function getType($field)
+    {
+        return $this->types[$field] ?? null;
+    }
+
+    /**
+     * @param        $query
+     * @param        $field
+     * @param string $direction
+     *
+     * @return mixed
+     * @throws Error
+     */
+    public function scopeOrder($query, $field, $direction = 'asc')
+    {
+        if (!array_key_exists($field, $this->types)) {
+            throw new Error('Cannot order by :field', compact('field'));
+        }
+
+        if ($direction != 'asc') {
+            $direction = 'desc';
+        }
+
+        return $query->orderBy($field, $direction);
+    }
+
+    /**
      * @return array
      */
-    public function getRules()
+    public function attributesToArray()
     {
-        return [];
+        $attributes = parent::attributesToArray();
+
+        foreach ($attributes as $key => $value) {
+            if ($value instanceof ValueObject) {
+                $attributes[$key] = $value->value;
+                foreach ($value->serialize as $name) {
+                    $attributes[$key . '_' . $name] = $value->{$name};
+                }
+            }
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * @param array $options
+     *
+     * @return bool
+     */
+    public function save(array $options = [])
+    {
+        foreach ($this->type as $field => $type) {
+            if (!$type->has_default) {
+                continue;
+            }
+
+            if (array_key_exists($field, $this->attributes)) {
+                continue;
+            }
+
+            $this->attributes[$field] = $type->default;
+        }
+
+        return parent::save($options);
     }
 }
