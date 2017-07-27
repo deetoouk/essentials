@@ -10,7 +10,7 @@ if (!function_exists('validate')) {
         $validator = app('validator')->make((array)$input, $rules, $messages, $attributes);
 
         if ($validator->fails()) {
-            throw new \JordanDobrev\Essentials\Exceptions\Errors($validator);
+            throw new \JTDSoft\Essentials\Exceptions\Errors($validator);
         }
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\JordanDobrev\Essentials\ValueObjects;
+namespace Tests\JTDSoft\Essentials\ValueObjects;
 
-use JordanDobrev\Essentials\ValueObjects\Country;
+use JTDSoft\Essentials\ValueObjects\Country;
 use Tests\TestCase;
 
 class CountryTest extends TestCase
 {
     /**
-     * @expectedException \JordanDobrev\Essentials\Exceptions\Error
+     * @expectedException \JTDSoft\Essentials\Exceptions\Error
      */
     public function test_fails_on_invalid_value_type()
     {
@@ -16,7 +16,7 @@ class CountryTest extends TestCase
     }
 
     /**
-     * @expectedException \JordanDobrev\Essentials\Exceptions\Error
+     * @expectedException \JTDSoft\Essentials\Exceptions\Error
      */
     public function test_fails_on_invalid_value()
     {
@@ -31,7 +31,7 @@ class CountryTest extends TestCase
     }
 
     /**
-     * @expectedException \JordanDobrev\Essentials\Exceptions\Error
+     * @expectedException \JTDSoft\Essentials\Exceptions\Error
      */
     public function test_fails_on_invalid_iso()
     {
@@ -53,7 +53,7 @@ class CountryTest extends TestCase
     }
 
     /**
-     * @expectedException \JordanDobrev\Essentials\Exceptions\Error
+     * @expectedException \JTDSoft\Essentials\Exceptions\Error
      */
     public function test_fails_on_made_up_country()
     {

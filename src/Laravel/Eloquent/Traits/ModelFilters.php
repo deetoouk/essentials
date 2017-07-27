@@ -1,14 +1,14 @@
 <?php
 
-namespace JordanDobrev\Essentials\Laravel\Eloquent\Traits;
+namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
 
-use JordanDobrev\Essentials\Services\Filter;
+use JTDSoft\Essentials\Services\Filter;
 use ReflectionClass;
 
 /**
  * Class ModelRelationships
  *
- * @package JordanDobrev\Essentials\Laravel\Eloquent\Traits
+ * @package JTDSoft\Essentials\Laravel\Eloquent\Traits
  */
 trait ModelFilters
 {

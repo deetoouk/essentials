@@ -1,5 +1,5 @@
 <?php
-namespace JordanDobrev\Essentials;
+namespace JTDSoft\Essentials;
 
 class Currencies
 {

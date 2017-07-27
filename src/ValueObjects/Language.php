@@ -1,9 +1,9 @@
 <?php
 
-namespace JordanDobrev\Essentials\ValueObjects;
+namespace JTDSoft\Essentials\ValueObjects;
 
-use JordanDobrev\Essentials\Exceptions\Error;
-use JordanDobrev\Essentials\Services\Languages;
+use JTDSoft\Essentials\Exceptions\Error;
+use JTDSoft\Essentials\Services\Languages;
 
 class Language extends ValueObject
 {

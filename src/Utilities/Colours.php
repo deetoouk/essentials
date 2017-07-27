@@ -1,8 +1,8 @@
 <?php
 
-namespace JordanDobrev\Essentials\Utilities;
+namespace JTDSoft\Essentials\Utilities;
 
-use JordanDobrev\Essentials\Exceptions\Error;
+use JTDSoft\Essentials\Exceptions\Error;
 
 class Colours
 {

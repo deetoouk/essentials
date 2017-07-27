@@ -1,11 +1,11 @@
 <?php
 
-namespace JordanDobrev\Essentials\Laravel\Eloquent\Types;
+namespace JTDSoft\Essentials\Laravel\Eloquent\Types;
 
 /**
  * Class Type
  *
- * @package JordanDobrev\Essentials\Laravel\Eloquent\Types
+ * @package JTDSoft\Essentials\Laravel\Eloquent\Types
  */
 abstract class Type
 {

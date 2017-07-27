@@ -1,15 +1,15 @@
 <?php
 
-namespace JordanDobrev\Essentials\Laravel\Eloquent\Types;
+namespace JTDSoft\Essentials\Laravel\Eloquent\Types;
 
 use Illuminate\Database\Eloquent\Model;
-use JordanDobrev\Essentials\Exceptions\Error;
-use JordanDobrev\Essentials\Exceptions\Fatal;
+use JTDSoft\Essentials\Exceptions\Error;
+use JTDSoft\Essentials\Exceptions\Fatal;
 
 /**
  * Class RelationType
  *
- * @package JordanDobrev\Essentials\Laravel\Eloquent\Types
+ * @package JTDSoft\Essentials\Laravel\Eloquent\Types
  */
 class RelationType extends Type
 {

@@ -1,4 +1,4 @@
-<?php namespace JordanDobrev\Essentials\Model;
+<?php namespace JTDSoft\Essentials\Model;
 
 use Illuminate\Database\Eloquent\Collection as BaseCollection;
 use Illuminate\Database\Eloquent\Model;

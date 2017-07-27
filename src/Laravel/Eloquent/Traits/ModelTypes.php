@@ -1,14 +1,14 @@
-<?php namespace JordanDobrev\Essentials\Laravel\Eloquent\Traits;
+<?php namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
 
-use JordanDobrev\Essentials\Exceptions\Error;
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\DateTimeType;
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\DateType;
-use JordanDobrev\Essentials\ValueObjects\ValueObject;
+use JTDSoft\Essentials\Exceptions\Error;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\DateTimeType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\DateType;
+use JTDSoft\Essentials\ValueObjects\ValueObject;
 
 /**
  * Class ModelTypes
  *
- * @package JordanDobrev\Essentials\Laravel\Eloquent\Traits
+ * @package JTDSoft\Essentials\Laravel\Eloquent\Traits
  */
 trait ModelTypes
 {

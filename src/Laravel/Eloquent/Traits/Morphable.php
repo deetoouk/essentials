@@ -1,6 +1,6 @@
 <?php
 
-namespace JordanDobrev\Essentials\Laravel\Eloquent\Traits;
+namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 /**
  * Class MorphedByCustomer
  *
- * @package JordanDobrev\Essentials\Laravel\Eloquent\Traits
+ * @package JTDSoft\Essentials\Laravel\Eloquent\Traits
  */
 trait Morphable
 {

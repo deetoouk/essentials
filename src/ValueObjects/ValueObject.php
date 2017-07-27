@@ -1,9 +1,9 @@
 <?php
 
-namespace JordanDobrev\Essentials\ValueObjects;
+namespace JTDSoft\Essentials\ValueObjects;
 
 use JsonSerializable;
-use JordanDobrev\Essentials\Exceptions\Fatal;
+use JTDSoft\Essentials\Exceptions\Fatal;
 
 abstract class ValueObject implements JsonSerializable
 {

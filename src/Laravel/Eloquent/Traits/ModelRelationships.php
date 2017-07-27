@@ -1,19 +1,19 @@
 <?php
 
-namespace JordanDobrev\Essentials\Laravel\Eloquent\Traits;
+namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Str;
-use JordanDobrev\Essentials\Exceptions\Error;
+use JTDSoft\Essentials\Exceptions\Error;
 use ReflectionClass;
 use ReflectionMethod;
 
 /**
  * Class ModelRelationships
  *
- * @package JordanDobrev\Essentials\Laravel\Eloquent\Traits
+ * @package JTDSoft\Essentials\Laravel\Eloquent\Traits
  */
 trait ModelRelationships
 {

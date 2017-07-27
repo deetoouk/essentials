@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\JordanDobrev\Essentials\ValueObjects;
+namespace Tests\JTDSoft\Essentials\ValueObjects;
 
-use JordanDobrev\Essentials\ValueObjects\Currency;
-use JordanDobrev\Essentials\ValueObjects\Money;
+use JTDSoft\Essentials\ValueObjects\Currency;
+use JTDSoft\Essentials\ValueObjects\Money;
 use Tests\TestCase;
 
 class MoneyTest extends TestCase
 {
     /**
-     * @expectedException \JordanDobrev\Essentials\Exceptions\Error
+     * @expectedException \JTDSoft\Essentials\Exceptions\Error
      */
     public function test_fails_on_invalid_value_type()
     {

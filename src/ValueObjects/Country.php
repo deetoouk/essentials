@@ -1,9 +1,9 @@
 <?php
 
-namespace JordanDobrev\Essentials\ValueObjects;
+namespace JTDSoft\Essentials\ValueObjects;
 
-use JordanDobrev\Essentials\Countries;
-use JordanDobrev\Essentials\Exceptions\Error;
+use JTDSoft\Essentials\Countries;
+use JTDSoft\Essentials\Exceptions\Error;
 
 class Country extends ValueObject
 {

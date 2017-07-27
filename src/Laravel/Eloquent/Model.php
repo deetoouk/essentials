@@ -1,17 +1,17 @@
 <?php
 
-namespace JordanDobrev\Essentials\Model;
+namespace JTDSoft\Essentials\Model;
 
 use Illuminate\Database\Eloquent\Model as LaravelModel;
-use JordanDobrev\Essentials\Laravel\Eloquent\Traits\ModelDecorators;
-use JordanDobrev\Essentials\Laravel\Eloquent\Traits\ModelFilters;
-use JordanDobrev\Essentials\Laravel\Eloquent\Traits\ModelRelationships;
-use JordanDobrev\Essentials\Laravel\Eloquent\Traits\ModelTypes;
+use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelDecorators;
+use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelFilters;
+use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelRelationships;
+use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelTypes;
 
 /**
  * Class Base
  *
- * @package JordanDobrev\Essentials\Model
+ * @package JTDSoft\Essentials\Model
  */
 abstract class Model extends LaravelModel
 {

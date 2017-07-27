@@ -1,8 +1,8 @@
 <?php
 
-namespace JordanDobrev\Essentials\ValueObjects;
+namespace JTDSoft\Essentials\ValueObjects;
 
-use JordanDobrev\Essentials\Exceptions\Error;
+use JTDSoft\Essentials\Exceptions\Error;
 
 class Percentage extends ValueObject
 {

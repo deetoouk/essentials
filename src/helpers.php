@@ -46,6 +46,6 @@ if (!function_exists('__')) {
 if (!function_exists('format')) {
     function format()
     {
-        return new \JordanDobrev\Essentials\Utilities\Formatter();
+        return new \JTDSoft\Essentials\Utilities\Formatter();
     }
 }

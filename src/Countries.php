@@ -1,8 +1,8 @@
 <?php
 
-namespace JordanDobrev\Essentials;
+namespace JTDSoft\Essentials;
 
-use JordanDobrev\Essentials\Exceptions\Error;
+use JTDSoft\Essentials\Exceptions\Error;
 
 class Countries
 {

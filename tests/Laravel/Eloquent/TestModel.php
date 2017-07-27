@@ -2,22 +2,22 @@
 
 namespace Tests\Illuminate\Database\Eloquent;
 
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\ArrayType;
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\BooleanType;
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\DateTimeType;
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\DateType;
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\EmailType;
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\EnumerableType;
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\FloatType;
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\IntegerType;
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\ObjectType;
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\RelationType;
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\StringType;
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\TextType;
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\UrlType;
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\ValueObjectType;
-use JordanDobrev\Essentials\Model\Model;
-use JordanDobrev\Essentials\ValueObjects\Currency;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\ArrayType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\BooleanType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\DateTimeType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\DateType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\EmailType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\EnumerableType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\FloatType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\IntegerType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\ObjectType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\RelationType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\StringType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\TextType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\UrlType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\ValueObjectType;
+use JTDSoft\Essentials\Model\Model;
+use JTDSoft\Essentials\ValueObjects\Currency;
 
 class TestModel extends Model
 {

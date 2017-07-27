@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\JordanDobrev\Essentials\Laravel\Eloquent\Types;
+namespace Tests\JTDSoft\Essentials\Laravel\Eloquent\Types;
 
-use JordanDobrev\Essentials\Laravel\Eloquent\Types\BooleanType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\BooleanType;
 use Tests\TestCase;
 
 /**
  * Class ArrayTypeTest
  *
- * @package Tests\JordanDobrev\Essentials\Laravel\Eloquent\Types
+ * @package Tests\JTDSoft\Essentials\Laravel\Eloquent\Types
  */
 class BooleanTypeTest extends TestCase
 {
@@ -46,7 +46,7 @@ class BooleanTypeTest extends TestCase
     }
 
     /**
-     * @expectedException \JordanDobrev\Essentials\Exceptions\Error
+     * @expectedException \JTDSoft\Essentials\Exceptions\Error
      * @expectedExceptionMessage foo must be boolean
      */
     public function test_fails_validates()

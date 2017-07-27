@@ -1,15 +1,15 @@
 <?php
 
-namespace JordanDobrev\Essentials\Laravel\Eloquent\Types;
+namespace JTDSoft\Essentials\Laravel\Eloquent\Types;
 
-use JordanDobrev\Essentials\Exceptions\Error;
-use JordanDobrev\Essentials\Exceptions\Fatal;
-use JordanDobrev\Essentials\ValueObjects\ValueObject;
+use JTDSoft\Essentials\Exceptions\Error;
+use JTDSoft\Essentials\Exceptions\Fatal;
+use JTDSoft\Essentials\ValueObjects\ValueObject;
 
 /**
  * Class ValueObjectType
  *
- * @package JordanDobrev\Essentials\Laravel\Eloquent\Types
+ * @package JTDSoft\Essentials\Laravel\Eloquent\Types
  */
 class ValueObjectType extends Type
 {

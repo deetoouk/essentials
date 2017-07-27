@@ -1,4 +1,4 @@
-<?php namespace JordanDobrev\Essentials\Exceptions;
+<?php namespace JTDSoft\Essentials\Exceptions;
 
 use Exception;
 

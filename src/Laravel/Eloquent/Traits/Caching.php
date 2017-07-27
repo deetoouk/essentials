@@ -1,6 +1,6 @@
 <?php
 
-namespace JordanDobrev\Essentials\Laravel\Eloquent\Traits;
+namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace JordanDobrev\Essentials\Laravel\Eloquent\Types;
+namespace JTDSoft\Essentials\Laravel\Eloquent\Types;
 
-use JordanDobrev\Essentials\Exceptions\Error;
+use JTDSoft\Essentials\Exceptions\Error;
 
 /**
  * Class StringType
  *
- * @package JordanDobrev\Essentials\Laravel\Eloquent\Types
+ * @package JTDSoft\Essentials\Laravel\Eloquent\Types
  */
 class StringType extends Type
 {

@@ -1,9 +1,9 @@
-<?php namespace JordanDobrev\Essentials\Laravel\Eloquent\Traits;
+<?php namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
 
 /**
  * Class Uuid
  *
- * @package JordanDobrev\Essentials\Laravel\Eloquent\Traits
+ * @package JTDSoft\Essentials\Laravel\Eloquent\Traits
  */
 trait Uuid
 {

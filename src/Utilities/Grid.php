@@ -1,6 +1,6 @@
 <?php
 
-namespace JordanDobrev\Essentials\Utilities;
+namespace JTDSoft\Essentials\Utilities;
 
 use Illuminate\Contracts\Pagination\Paginator;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace JordanDobrev\Essentials\Utilities;
+namespace JTDSoft\Essentials\Utilities;
 
 use DateTime;
-use JordanDobrev\Essentials\Currencies;
-use JordanDobrev\Essentials\ValueObjects\Currency;
+use JTDSoft\Essentials\Currencies;
+use JTDSoft\Essentials\ValueObjects\Currency;
 
 class Formatter
 {
