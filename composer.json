@@ -39,7 +39,7 @@
     },
     "files": [
       "src/helpers.php",
-      "src/laravel/helpers.php"
+      "src/Laravel/helpers.php"
     ]
   },
   "config": {
