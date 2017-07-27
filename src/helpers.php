@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 if (!function_exists('class_uses_deep')) {
     function class_uses_deep($class, $autoload = true)
     {
@@ -23,5 +25,27 @@ if (!function_exists('class_uses_deep')) {
         }
 
         return array_unique($traits);
+    }
+}
+
+if (!function_exists('__')) {
+    function __(string $line, array $replace = [])
+    {
+        foreach ($replace as $key => $value) {
+            $line = str_replace(
+                [':' . $key, ':' . Str::upper($key), ':' . Str::ucfirst($key)],
+                [$value, Str::upper($value), Str::ucfirst($value)],
+                $line
+            );
+        }
+
+        return $line;
+    }
+}
+
+if (!function_exists('format')) {
+    function format()
+    {
+        return new \JordanDobrev\Essentials\Utilities\Formatter();
     }
 }

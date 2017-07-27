@@ -29,7 +29,7 @@ abstract class Type
      *
      * @return $this
      */
-    public function nullable(boolean $nullable = true)
+    public function nullable(bool $nullable = true)
     {
         $this->nullable = $nullable;
 

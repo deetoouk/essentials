@@ -3,7 +3,7 @@
 namespace JordanDobrev\Essentials\ValueObjects;
 
 use JordanDobrev\Essentials\Exceptions\Error;
-use JordanDobrev\Essentials\Services\Currencies;
+use JordanDobrev\Essentials\Currencies;
 
 class Currency extends ValueObject
 {

@@ -11,6 +11,8 @@ class Money extends ValueObject
      */
     private $currency;
 
+    public static $defaultCurrent = 'GBP';
+
     public $serialize = [
         'in_smallest_unit',
         'formatted',
@@ -26,7 +28,7 @@ class Money extends ValueObject
 
         parent::__construct(intval($value));
 
-        $this->currency = $currency ?? config('campaign')->currency;
+        $this->currency = $currency ?? new Currency(self::$defaultCurrent);
     }
 
     public function inSmallestUnit(): int

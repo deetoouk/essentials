@@ -5,11 +5,11 @@ namespace JordanDobrev\Essentials\Laravel\Eloquent\Types;
 use JordanDobrev\Essentials\Exceptions\Error;
 
 /**
- * Class IntegerType
+ * Class FloatType
  *
  * @package JordanDobrev\Essentials\Laravel\Eloquent\Types
  */
-class IntegerType extends Type
+class FloatType extends Type
 {
     /**
      * @var bool
@@ -17,12 +17,12 @@ class IntegerType extends Type
     public $unsigned;
 
     /**
-     * @var integer
+     * @var float
      */
     public $min;
 
     /**
-     * @var integer
+     * @var float
      */
     public $max;
 
@@ -39,11 +39,11 @@ class IntegerType extends Type
     }
 
     /**
-     * @param int $max
+     * @param float $max
      *
      * @return $this
      */
-    public function max(int $max)
+    public function max(float $max)
     {
         $this->max = $max;
 
@@ -51,11 +51,11 @@ class IntegerType extends Type
     }
 
     /**
-     * @param int $min
+     * @param float $min
      *
      * @return $this
      */
-    public function min(int $min)
+    public function min(float $min)
     {
         $this->min = $min;
 
@@ -64,17 +64,17 @@ class IntegerType extends Type
 
     function validate($attribute, $value)
     {
-        if (!filter_var($value, FILTER_VALIDATE_INT)) {
-            throw new Error(':attribute must be an integer');
+        if (!filter_var($value, FILTER_VALIDATE_FLOAT)) {
+            throw new Error(':attribute must be an float');
         }
     }
 
     public function cast($value)
     {
-        if (is_int($value)) {
+        if (is_float($value)) {
             return $value;
         }
 
-        return intval($value);
+        return floatval($value);
     }
 }

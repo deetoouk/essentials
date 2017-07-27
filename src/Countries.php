@@ -22,7 +22,7 @@ class Countries
             return;
         }
 
-        self::$countries = include __DIR__ . ("../vendor/umpirsky/country-list/data/en_GB/country.php");
+        self::$countries = include __DIR__ . ("/../vendor/umpirsky/country-list/data/en_GB/country.php");
     }
 
     public static function existsByIso($iso)

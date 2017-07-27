@@ -14,7 +14,7 @@ class ArrayType extends Type
     public function validate($attribute, $value)
     {
         if (!is_array($value)) {
-            throw new Error(':attribute must be an array');
+            throw new Error(':attribute must be an array', compact('attribute'));
         }
     }
 

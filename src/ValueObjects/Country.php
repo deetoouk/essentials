@@ -2,9 +2,8 @@
 
 namespace JordanDobrev\Essentials\ValueObjects;
 
+use JordanDobrev\Essentials\Countries;
 use JordanDobrev\Essentials\Exceptions\Error;
-use JordanDobrev\Essentials\Laravel\Model\Gateway\ReplacementRule;
-use JordanDobrev\Essentials\Services\Countries;
 
 class Country extends ValueObject
 {
@@ -27,21 +26,6 @@ class Country extends ValueObject
 
         if ($this->resolved) {
             return;
-        }
-
-        $replacement_rule = (new ReplacementRule())
-            ->whereType('country')
-            ->whereFrom($value)
-            ->first();
-
-        if ($replacement_rule) {
-            $this->value = $replacement_rule->to;
-
-            $this->resolveIso();
-
-            if ($this->resolved) {
-                return;
-            }
         }
 
         throw new Error('Invalid country value :value', ['value' => $this->value]);

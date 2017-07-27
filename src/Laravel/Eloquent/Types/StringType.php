@@ -26,7 +26,7 @@ class StringType extends Type
      *
      * @return $this
      */
-    public function max(integer $max)
+    public function max(int $max)
     {
         $this->max = $max;
 
@@ -38,7 +38,7 @@ class StringType extends Type
      *
      * @return $this
      */
-    public function min(integer $min)
+    public function min(int $min)
     {
         $this->min = $min;
 
