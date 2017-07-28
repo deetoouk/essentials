@@ -13,17 +13,19 @@ use JTDSoft\Essentials\Exceptions\Error;
  */
 class DateType extends Type
 {
+    public static $format = 'Y-m-d 00:00:00';
+
     function validate($attribute, $value)
     {
         if (!($value instanceof DateTime)) {
-            throw new Error(':attribute must be a date time object');
+            throw new Error(':attribute must be a date time object', compact('attribute'));
         }
     }
 
     public function cast($value)
     {
         if ($value instanceof DateTime) {
-            return $value;
+            return Carbon::instance($value)->startOfDay();
         }
 
         return Carbon::createFromTimestamp(strtotime($value))->startOfDay();
@@ -31,6 +33,6 @@ class DateType extends Type
 
     public function toPrimitive($value)
     {
-        return $value->startOfDay()->format('Y-m-d H:i:s');
+        return $value->format(self::$format);
     }
 }

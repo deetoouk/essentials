@@ -6,7 +6,7 @@ use JTDSoft\Essentials\Laravel\Eloquent\Types\BooleanType;
 use Tests\TestCase;
 
 /**
- * Class ArrayTypeTest
+ * Class BooleanTypeTest
  *
  * @package Tests\JTDSoft\Essentials\Laravel\Eloquent\Types
  */
