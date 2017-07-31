@@ -65,7 +65,28 @@ class FloatType extends Type
     public function validate($attribute, $value)
     {
         if (!filter_var($value, FILTER_VALIDATE_FLOAT)) {
-            throw new Error(':attribute must be an float');
+            throw new Error(':attribute must be float', compact('attribute'));
+        }
+
+        if (isset($this->max) && $value > $this->max) {
+            throw new Error(
+                ':attribute cannot be more than :max',
+                compact('attribute') + ['max' => $this->max]
+            );
+        }
+
+        if ($this->unsigned && $value < 0) {
+            throw new Error(
+                ':attribute cannot be less than 0',
+                compact('attribute')
+            );
+        }
+
+        if (isset($this->min) && $value < $this->min) {
+            throw new Error(
+                ':attribute cannot be less than :min',
+                compact('attribute') + ['min' => $this->min]
+            );
         }
     }
 
