@@ -36,7 +36,7 @@ class RelationType extends Type
         $this->relation = $relation;
     }
 
-    function validate($attribute, $value)
+    public function validate($attribute, $value)
     {
         if (!($value instanceof $this->relation)) {
             throw new Error(':attribute must be an instance of ' . $this->relation);

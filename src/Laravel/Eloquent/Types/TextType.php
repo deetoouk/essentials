@@ -45,7 +45,7 @@ class TextType extends Type
         return $this;
     }
 
-    function validate($attribute, $value)
+    public function validate($attribute, $value)
     {
         if (!is_string($value)) {
             throw new Error(':attribute must be a string');

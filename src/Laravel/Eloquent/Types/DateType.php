@@ -15,7 +15,7 @@ class DateType extends Type
 {
     public static $format = 'Y-m-d 00:00:00';
 
-    function validate($attribute, $value)
+    public function validate($attribute, $value)
     {
         if (!($value instanceof DateTime)) {
             throw new Error(':attribute must be a date time object', compact('attribute'));

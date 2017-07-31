@@ -11,7 +11,7 @@ use JTDSoft\Essentials\Exceptions\Error;
  */
 class UrlType extends Type
 {
-    function validate($attribute, $value)
+    public function validate($attribute, $value)
     {
         if (!filter_var($value, FILTER_VALIDATE_URL)) {
             throw new Error(':attribute must be a valid url');

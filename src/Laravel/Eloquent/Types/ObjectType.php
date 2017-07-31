@@ -11,7 +11,7 @@ use JTDSoft\Essentials\Exceptions\Error;
  */
 class ObjectType extends Type
 {
-    function validate($attribute, $value)
+    public function validate($attribute, $value)
     {
         if (!is_object($value)) {
             throw new Error(':attribute must be an object');

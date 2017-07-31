@@ -11,7 +11,7 @@ use JTDSoft\Essentials\Exceptions\Error;
  */
 class EmailType extends Type
 {
-    function validate($attribute, $value)
+    public function validate($attribute, $value)
     {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
             throw new Error(':attribute must be a valid email address');

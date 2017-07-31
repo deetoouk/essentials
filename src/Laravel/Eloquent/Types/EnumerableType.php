@@ -40,7 +40,7 @@ class EnumerableType extends Type
         return $this;
     }
 
-    function validate($attribute, $value)
+    public function validate($attribute, $value)
     {
         if (!in_array($value, $this->values)) {
             throw new Error(':attribute has an invalid value');

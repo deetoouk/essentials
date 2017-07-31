@@ -83,5 +83,4 @@ trait ModelFilters
 
         return $query;
     }
-
 }

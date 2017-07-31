@@ -51,7 +51,7 @@ abstract class Type
         return $this;
     }
 
-    abstract function validate($attribute, $value);
+    abstract public function validate($attribute, $value);
 
     public function cast($value)
     {

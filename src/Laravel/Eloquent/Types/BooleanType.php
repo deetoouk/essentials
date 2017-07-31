@@ -11,7 +11,7 @@ use JTDSoft\Essentials\Exceptions\Error;
  */
 class BooleanType extends Type
 {
-    function validate($attribute, $value)
+    public function validate($attribute, $value)
     {
         if (!is_bool($value)) {
             throw new Error(':attribute must be boolean', compact('attribute'));
