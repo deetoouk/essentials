@@ -14,7 +14,7 @@ class ObjectType extends Type
     public function validate($attribute, $value)
     {
         if (!is_object($value)) {
-            throw new Error(':attribute must be an object');
+            throw new Error(':attribute must be an object', compact('attribute'));
         }
     }
 
@@ -23,7 +23,11 @@ class ObjectType extends Type
         if (is_object($value)) {
             return $value;
         }
-        
+
+        if (is_array($value)) {
+            return (object)$value;
+        }
+
         return (object)json_decode($value);
     }
 
