@@ -22,9 +22,11 @@ class ArrayType extends Type
     {
         if (is_array($value)) {
             return $value;
+        } elseif (is_string($value)) {
+            return json_decode($value, true);
         }
 
-        return json_decode($value, true);
+        throw new Error('Invalid value :value', compact('value'));
     }
 
     public function toPrimitive($value)

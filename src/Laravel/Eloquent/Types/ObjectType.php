@@ -22,13 +22,13 @@ class ObjectType extends Type
     {
         if (is_object($value)) {
             return $value;
-        }
-
-        if (is_array($value)) {
+        } elseif (is_array($value)) {
             return (object)$value;
+        } elseif (is_string($value)) {
+            return (object)json_decode($value);
         }
 
-        return (object)json_decode($value);
+        throw new Error('Invalid value :value', compact($value));
     }
 
     public function toPrimitive($value)
