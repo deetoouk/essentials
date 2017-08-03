@@ -14,7 +14,7 @@ class Formatter
             return $amount;
         } else {
             $whole = intval($amount / 100);
-            $coins = $amount % 100;
+            $coins = abs($amount % 100);
 
             return sprintf('%1$d.%2$02d', $whole, $coins);
         }
