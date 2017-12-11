@@ -11,7 +11,7 @@ class Money extends ValueObject
      */
     private $currency;
 
-    public static $defaultCurrent = 'GBP';
+    public static $defaultCurrency = 'GBP';
 
     public $serialize = [
         'in_smallest_unit',
@@ -28,7 +28,7 @@ class Money extends ValueObject
 
         parent::__construct(intval($value));
 
-        $this->currency = $currency ?? new Currency(self::$defaultCurrent);
+        $this->currency = $currency ?? new Currency(self::$defaultCurrency);
     }
 
     public function inSmallestUnit(): int
