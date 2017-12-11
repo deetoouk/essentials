@@ -1,5 +1,7 @@
 <?php namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
 
+use JTDSoft\Essentials\Laravel\Eloquent\Types\UuidType;
+
 /**
  * Class Uuid
  *
@@ -14,11 +16,13 @@ trait Uuid
      */
     public static function bootUuid()
     {
-        static::creating(function ($model) {
-            if (!$model->id) {
-                $model->id = $model->generateUuid();
+        static::creating(
+            function ($model) {
+                if (!$model->id) {
+                    $model->id = $model->generateUuid();
+                }
             }
-        });
+        );
     }
 
     /**
@@ -27,7 +31,7 @@ trait Uuid
     public function initUuid()
     {
         $this->incrementing = false;
-        $this->types['id']  = 'uuid';
+        $this->types['id']  = new UuidType();
     }
 
     /**

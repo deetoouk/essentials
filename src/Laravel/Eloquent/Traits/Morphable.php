@@ -4,6 +4,7 @@ namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\StringType;
 
 /**
  * Class MorphedByCustomer
@@ -20,7 +21,7 @@ trait Morphable
     public function initMorphable()
     {
         $this->types['model_id']   = Model::class;
-        $this->types['model_type'] = 'string';
+        $this->types['model_type'] = new StringType();
     }
 
     /**
