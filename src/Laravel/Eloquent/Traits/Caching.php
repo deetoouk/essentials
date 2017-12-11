@@ -56,6 +56,7 @@ trait Caching
 
     public static function getAllCachedById()
     {
+        //60 minutes remember time
         return cache()->remember(static::getCacheKey(), (new static)->cache_time, function () {
             return (new static())->withoutGlobalScopes()->get()->keyBy('id');
         });
