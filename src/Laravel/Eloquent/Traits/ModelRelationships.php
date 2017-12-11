@@ -24,11 +24,6 @@ trait ModelRelationships
 
     protected static function bootModelRelationships()
     {
-        //add to morph map
-        Relation::morphMap([
-            class_basename(static::class) => static::class,
-        ]);
-
         static::loadRelationships();
     }
 
@@ -107,7 +102,7 @@ trait ModelRelationships
 
     /**
      * @param string $method
-     * @param array  $parameters
+     * @param array $parameters
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|mixed
      */
@@ -147,9 +142,12 @@ trait ModelRelationships
 
                 $relationObject = $this->belongsTo($this->getType($field), $field, 'id', $relation);
 
-                return tap($relationObject->getResults(), function ($results) use ($relation) {
-                    $this->setRelation($relation, $results);
-                });
+                return tap(
+                    $relationObject->getResults(),
+                    function ($results) use ($relation) {
+                        $this->setRelation($relation, $results);
+                    }
+                );
             }
         }
 
@@ -226,13 +224,12 @@ trait ModelRelationships
      * Begin querying a model with eager loading.
      *
      * @param               $query
-     * @param array|string  $relations
-     * @param bool          $validate
+     * @param array|string $relations
      *
      * @return Builder|static
      * @throws Error
      */
-    public function scopeWithRelations($query, $relations, $validate = false)
+    public function scopeWithRelations($query, $relations)
     {
         if (!$relations) {
             return $query;
@@ -247,10 +244,8 @@ trait ModelRelationships
 
         $relations = array_flatten($relations);
 
-        if ($validate) {
-            foreach ($relations as $relation) {
-                $query->getModel()->validateRelation($relation);
-            }
+        foreach ($relations as $relation) {
+            $query->getModel()->validateRelation($relation);
         }
 
         return $query->with($relations);
