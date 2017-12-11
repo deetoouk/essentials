@@ -3,6 +3,12 @@
 use Illuminate\Support\Str;
 
 if (!function_exists('class_uses_deep')) {
+    /**
+     * @param $class
+     * @param bool $autoload
+     *
+     * @return array
+     */
     function class_uses_deep($class, $autoload = true)
     {
         $traits = [];
@@ -29,6 +35,12 @@ if (!function_exists('class_uses_deep')) {
 }
 
 if (!function_exists('__')) {
+    /**
+     * @param string $line
+     * @param array $replace
+     *
+     * @return mixed|string
+     */
     function __(string $line, array $replace = [])
     {
         foreach ($replace as $key => $value) {
@@ -44,8 +56,51 @@ if (!function_exists('__')) {
 }
 
 if (!function_exists('format')) {
+    /**
+     * @return \JTDSoft\Essentials\Utilities\Formatter
+     */
     function format()
     {
         return new \JTDSoft\Essentials\Utilities\Formatter();
+    }
+}
+
+if (!function_exists('format')) {
+    /**
+     * @param null $message
+     * @param null $title
+     * @param null $time
+     * @param null $is_html
+     *
+     * @return mixed
+     */
+    function flash($message = null, $title = null, $time = null, $is_html = null)
+    {
+        $flash = new \JTDSoft\Essentials\Utilities\Flash();
+
+        if (func_num_args() == 0) {
+            return $flash;
+        }
+
+        return $flash->success($message, $title, $time, $is_html);
+    }
+}
+
+if (!function_exists('bark')) {
+    /**
+     * @param null $message
+     * @param null $title
+     *
+     * @return \JTDSoft\Essentials\Utilities\Bark|string
+     */
+    function bark($message = null, $title = null)
+    {
+        $bark = new \JTDSoft\Essentials\Utilities\Bark();
+
+        if (func_num_args() == 0) {
+            return $bark;
+        }
+
+        return $bark->success($message, $title);
     }
 }
