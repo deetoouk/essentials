@@ -1,4 +1,5 @@
 <?php
+
 namespace JTDSoft\Essentials;
 
 class Currencies
@@ -10,7 +11,7 @@ class Currencies
         'VND',
         'CLP',
         'ISK',
-        'HUF'
+        'HUF',
     ];
 
     protected static $currencies = [
