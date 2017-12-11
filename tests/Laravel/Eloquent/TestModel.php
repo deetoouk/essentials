@@ -16,7 +16,7 @@ use JTDSoft\Essentials\Laravel\Eloquent\Types\StringType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\TextType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\UrlType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\ValueObjectType;
-use JTDSoft\Essentials\Eloquent\Model;
+use JTDSoft\Essentials\Laravel\Eloquent\Model;
 use JTDSoft\Essentials\ValueObjects\Currency;
 
 class TestModel extends Model
