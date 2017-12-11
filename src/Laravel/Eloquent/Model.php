@@ -1,6 +1,6 @@
 <?php
 
-namespace JTDSoft\Essentials\Model;
+namespace JTDSoft\Essentials\Eloquent;
 
 use Illuminate\Database\Eloquent\Model as LaravelModel;
 use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelDecorators;
@@ -11,7 +11,7 @@ use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelTypes;
 /**
  * Class Base
  *
- * @package JTDSoft\Essentials\Model
+ * @package JTDSoft\Essentials\Eloquent
  */
 abstract class Model extends LaravelModel
 {
