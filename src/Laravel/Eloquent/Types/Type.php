@@ -43,7 +43,7 @@ abstract class Type
      *
      * @return $this
      */
-    public function default(mixed $default)
+    public function default(?mixed $default)
     {
         $this->default     = $default;
         $this->has_default = true;

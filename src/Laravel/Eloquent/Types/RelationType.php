@@ -29,7 +29,7 @@ class RelationType extends Type
 
     public function relation(string $relation)
     {
-        if (!($relation instanceof Model)) {
+        if (!is_subclass_of($relation, Model::class) && $relation !== Model::class) {
             throw new Fatal('relation value should be an instance of Model!');
         }
 
