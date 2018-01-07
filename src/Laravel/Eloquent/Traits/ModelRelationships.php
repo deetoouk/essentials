@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Str;
 use JTDSoft\Essentials\Exceptions\Error;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\RelationType;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -58,7 +59,7 @@ trait ModelRelationships
         }
 
         foreach ($model->getTypes() as $parameter => $type) {
-            if (!is_subclass_of($type, Model::class) || $type === Model::class) {
+            if (!($type instanceof RelationType)) {
                 continue;
             }
 
@@ -113,8 +114,8 @@ trait ModelRelationships
             $field = snake_case($method) . '_id';
             $type  = $this->getType($field);
 
-            if (is_subclass_of($this->getType($field), Model::class) || $type === Model::class) {
-                return $this->belongsTo($this->types[$field], $field, 'id', $method);
+            if ($type instanceof RelationType) {
+                return $this->belongsTo($type->relation, $field, 'id', $method);
             }
         }
 
