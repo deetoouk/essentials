@@ -233,7 +233,7 @@ trait ModelTypes
      */
     public function save(array $options = [])
     {
-        foreach ($this->type as $field => $type) {
+        foreach ($this->types as $field => $type) {
             if (!$type->has_default) {
                 continue;
             }
