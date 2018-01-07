@@ -133,7 +133,7 @@ trait ModelRelationships
         $field = snake_case($key) . '_id';
         $type  = $this->getType($field);
 
-        if (is_subclass_of($this->getType($field), Model::class) || $type === Model::class) {
+        if ($type instanceof RelationType) {
             $relation = camel_case($key);
 
             if (!method_exists($this, $relation)) {
@@ -141,7 +141,7 @@ trait ModelRelationships
                     return $this->relations[$relation];
                 }
 
-                $relationObject = $this->belongsTo($this->getType($field), $field, 'id', $relation);
+                $relationObject = $this->belongsTo($type->relation, $field, 'id', $relation);
 
                 return tap(
                     $relationObject->getResults(),
