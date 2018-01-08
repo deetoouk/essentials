@@ -20,7 +20,7 @@ class Error extends Exception
             $previous = $params[1] ?? $previous;
         }
 
-        $message = translate($message, $translate_parameters);
+        $message = __($message, $translate_parameters);
 
         parent::__construct($message, $code, $previous);
     }
