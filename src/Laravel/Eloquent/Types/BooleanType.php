@@ -13,7 +13,7 @@ class BooleanType extends Type
 {
     public function validate($attribute, $value)
     {
-        if (filter_var($value, FILTER_VALIDATE_BOOLEAN) === false) {
+        if (!is_bool($value)) {
             throw new Error(':attribute must be boolean', compact('attribute'));
         }
     }
