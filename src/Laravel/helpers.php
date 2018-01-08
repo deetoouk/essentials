@@ -12,5 +12,7 @@ if (!function_exists('validate')) {
         if ($validator->fails()) {
             throw new \JTDSoft\Essentials\Exceptions\Errors($validator);
         }
+
+        return array_only($input ?? [], array_keys($rules));
     }
 }
