@@ -13,7 +13,7 @@ class EmailType extends Type
 {
     public function validate($attribute, $value)
     {
-        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+        if (filter_var($value, FILTER_VALIDATE_EMAIL) === false) {
             throw new Error(':attribute must be a valid email address', compact('attribute'));
         }
     }

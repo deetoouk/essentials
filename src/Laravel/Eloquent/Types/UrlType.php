@@ -13,7 +13,7 @@ class UrlType extends Type
 {
     public function validate($attribute, $value)
     {
-        if (!filter_var($value, FILTER_VALIDATE_URL)) {
+        if (filter_var($value, FILTER_VALIDATE_URL) === false) {
             throw new Error(':attribute must be a valid url', compact('attribute'));
         }
     }

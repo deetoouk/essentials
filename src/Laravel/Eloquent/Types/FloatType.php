@@ -64,7 +64,7 @@ class FloatType extends Type
 
     public function validate($attribute, $value)
     {
-        if (!filter_var($value, FILTER_VALIDATE_FLOAT)) {
+        if (filter_var($value, FILTER_VALIDATE_FLOAT) === false) {
             throw new Error(':attribute must be float', compact('attribute'));
         }
 

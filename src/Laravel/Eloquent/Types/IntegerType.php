@@ -74,7 +74,7 @@ class IntegerType extends Type
 
     public function validate($attribute, $value)
     {
-        if (!filter_var($value, FILTER_VALIDATE_INT)) {
+        if (filter_var($value, FILTER_VALIDATE_INT) === false) {
             throw new Error(':attribute must be integer', compact('attribute'));
         }
 
