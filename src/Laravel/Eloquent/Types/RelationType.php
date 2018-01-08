@@ -38,7 +38,7 @@ class RelationType extends Type
 
     public function validate($attribute, $value)
     {
-        if (!($value instanceof $this->relation)) {
+        if (!is_subclass_of($this->relation, Model::class) && $this->relation !== Model::class) {
             throw new Error(':attribute must be an instance of ' . $this->relation);
         }
 
