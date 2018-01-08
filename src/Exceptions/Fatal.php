@@ -20,7 +20,7 @@ class Fatal extends Exception
             $previous = $params[1] ?? $previous;
         }
 
-        $message = __($message, $translate_parameters);
+        $message = translate($message, $translate_parameters);
 
         parent::__construct($message, $code, $previous);
     }

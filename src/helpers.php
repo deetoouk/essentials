@@ -34,24 +34,29 @@ if (!function_exists('class_uses_deep')) {
     }
 }
 
-if (!function_exists('__')) {
-    /**
+if (!function_exists('translate')) {
+/**
      * @param string $line
-     * @param array $replace
+$app = require __DIR__.'/../vendor/laravel/laravel/bootstrap/app.php'
+ *     * @param array $replace
      *
      * @return mixed|string
      */
-    function __(string $line, array $replace = [])
+    function translate(string $line, array $replace = [])
     {
-        foreach ($replace as $key => $value) {
-            $line = str_replace(
-                [':' . $key, ':' . Str::upper($key), ':' . Str::ucfirst($key)],
-                [$value, Str::upper($value), Str::ucfirst($value)],
-                $line
-            );
-        }
+        if(function_exists('__')) {
+            return __($line, $replace);
+        } else {
+            foreach ($replace as $key => $value) {
+                $line = str_replace(
+                    [':' . $key, ':' . Str::upper($key), ':' . Str::ucfirst($key)],
+                    [$value, Str::upper($value), Str::ucfirst($value)],
+                    $line
+                );
+            }
 
-        return $line;
+            return $line;
+        }
     }
 }
 

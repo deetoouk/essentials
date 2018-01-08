@@ -16,6 +16,7 @@
     "umpirsky/country-list": "^2.0"
   },
   "require-dev": {
+    "laravel/laravel": "^5.4",
     "phpunit/phpunit": "~6.0",
     "phpspec/phpspec": "~2.1",
     "mockery/mockery": "*",
