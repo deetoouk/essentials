@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Str;
-
 if (!function_exists('class_uses_deep')) {
     /**
      * @param $class
