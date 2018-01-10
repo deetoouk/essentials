@@ -13,14 +13,14 @@ class BooleanType extends Type
 {
     public function validate($attribute, $value)
     {
-        if (is_bool($value) === false) {
+        if ($this->isBool($value) === false) {
             throw new Error(':attribute must be boolean', compact('attribute'));
         }
     }
 
     public function cast($value)
     {
-        if (is_bool($value) === false) {
+        if ($this->isBool($value) === false) {
             return $value;
         }
 
@@ -30,5 +30,14 @@ class BooleanType extends Type
     public function toPrimitive($value)
     {
         return $value ? 1 : 0;
+    }
+
+    /**
+     * @param $value
+     * @return bool
+     */
+    protected function isBool($value)
+    {
+        return is_bool($value) || $value === 1 || $value === 0;
     }
 }
