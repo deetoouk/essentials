@@ -45,7 +45,7 @@ trait ModelTypes
     public function initModelTypes()
     {
         $defaultTypes = [
-            'id' =>  new IntegerType(),
+            'id' =>  (new IntegerType())->unsigned(true),
         ];
 
         $this->types = array_merge($defaultTypes, $this->types(), $this->types);
