@@ -3,6 +3,7 @@
 use JTDSoft\Essentials\Exceptions\Error;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\DateTimeType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\DateType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\IntegerType;
 use JTDSoft\Essentials\ValueObjects\ValueObject;
 
 /**
@@ -43,7 +44,11 @@ trait ModelTypes
      */
     public function initModelTypes()
     {
-        $this->types = array_merge($this->types(), $this->types);
+        $defaultTypes = [
+            'id' =>  new IntegerType(),
+        ];
+
+        $this->types = array_merge($defaultTypes, $this->types(), $this->types);
 
         if ($this->timestamps) {
             $types['updated_at'] = new DateTimeType();
@@ -112,7 +117,7 @@ trait ModelTypes
 
     /**
      * @param string $key
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @return mixed
      */
@@ -131,7 +136,7 @@ trait ModelTypes
      * Set a given attribute on the model.
      *
      * @param  string $key
-     * @param  mixed  $value
+     * @param  mixed $value
      *
      * @return void
      */
