@@ -47,12 +47,12 @@ class BooleanTypeTest extends TestCase
 
     /**
      * @expectedException \JTDSoft\Essentials\Exceptions\Error
-     * @expectedExceptionMessage foo must be boolean
+     * @expectedExceptionMessage default value must be boolean
      */
-    public function test_fails_validates()
+    public function test_invalid_default_boolean()
     {
         $obj = new BooleanType();
 
-        $obj->validate('foo', 'some string');
+        $obj->default('some faulty string');
     }
 }

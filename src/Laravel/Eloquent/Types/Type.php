@@ -45,7 +45,13 @@ abstract class Type
      */
     public function default($default)
     {
-        $this->default     = $this->cast($default);
+        if (!is_null($default)) {
+            $default = $this->cast($default);
+
+            $this->validate('default value', $default);
+        }
+
+        $this->default     = $default;
         $this->has_default = true;
 
         return $this;
