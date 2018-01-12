@@ -40,12 +40,17 @@ trait ModelTypes
     }
 
     /**
+     * @return array|null
+     */
+    abstract protected function types(): ?array;
+
+    /**
      *
      */
     public function initModelTypes()
     {
         $defaultTypes = [
-            'id' =>  (new IntegerType())->unsigned(true),
+            'id' => (new IntegerType())->unsigned(true),
         ];
 
         $this->types = array_merge($defaultTypes, $this->types(), $this->types);
