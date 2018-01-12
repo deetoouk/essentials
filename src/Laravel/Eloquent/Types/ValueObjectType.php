@@ -19,6 +19,8 @@ class ValueObjectType extends Type
      * ValueObjectType constructor.
      *
      * @param string|null $valueObject
+     *
+     * @throws Fatal
      */
     public function __construct(string $valueObject = null)
     {
@@ -29,7 +31,7 @@ class ValueObjectType extends Type
 
     public function valueObject(string $valueObject)
     {
-        if (!($valueObject instanceof ValueObject)) {
+        if (is_subclass_of($valueObject, ValueObject::class)) {
             throw new Fatal('ValueObject value should be an instance of ValueObject!');
         }
 
