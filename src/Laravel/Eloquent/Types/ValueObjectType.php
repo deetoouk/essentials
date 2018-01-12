@@ -40,8 +40,9 @@ class ValueObjectType extends Type
 
     public function validate($attribute, $value)
     {
-        if (!($value instanceof $this->valueObject)) {
-            throw new Error(':attribute must be an instance of ' . $this->valueObject);
+        //nothing to do here. Validation done by value object constructor
+        if (!is_scalar($value)) {
+            throw new Error(':attribute must be an scalar value after casting for ValueObject' . $this->valueObject);
         }
     }
 
