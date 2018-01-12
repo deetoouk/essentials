@@ -5,6 +5,7 @@ use JTDSoft\Essentials\Laravel\Eloquent\Types\DateTimeType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\DateType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\IntegerType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\ValueObjectType;
+use JTDSoft\Essentials\ValueObjects\ValueObject;
 
 /**
  * Class ModelTypes
@@ -231,6 +232,12 @@ trait ModelTypes
                 $valueObject = $this->getType($key)->cast($value);
                 foreach ($valueObject->serialize as $name) {
                     $attributes[$key . '_' . $name] = $valueObject->{$name};
+                }
+            } elseif ($value instanceof ValueObject) {
+                $attributes[$key] = $value->toPrimitive();
+
+                foreach ($value->serialize as $name) {
+                    $attributes[$key . '_' . $name] = $value->{$name};
                 }
             }
         }
