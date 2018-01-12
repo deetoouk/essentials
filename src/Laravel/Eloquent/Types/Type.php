@@ -45,7 +45,7 @@ abstract class Type
      */
     public function default($default)
     {
-        $this->default     = $default;
+        $this->default     = $this->cast($default);
         $this->has_default = true;
 
         return $this;
