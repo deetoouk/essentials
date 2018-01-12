@@ -4,7 +4,7 @@ use JTDSoft\Essentials\Exceptions\Error;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\DateTimeType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\DateType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\IntegerType;
-use JTDSoft\Essentials\ValueObjects\ValueObject;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\ValueObjectType;
 
 /**
  * Class ModelTypes
@@ -225,10 +225,12 @@ trait ModelTypes
         $attributes = parent::attributesToArray();
 
         foreach ($attributes as $key => $value) {
-            if ($value instanceof ValueObject) {
-                $attributes[$key] = $value->value;
-                foreach ($value->serialize as $name) {
-                    $attributes[$key . '_' . $name] = $value->{$name};
+            if ($this->getType($key) instanceof ValueObjectType) {
+                $attributes[$key] = $value;
+
+                $valueObject = $this->getType($key)->cast($value);
+                foreach ($valueObject->serialize as $name) {
+                    $attributes[$key . '_' . $name] = $valueObject->{$name};
                 }
             }
         }

@@ -7,6 +7,7 @@ use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelDecorators;
 use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelFilters;
 use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelRelationships;
 use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelTypes;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\ValueObjectType;
 
 /**
  * Class Base
@@ -40,6 +41,30 @@ abstract class Model extends LaravelModel
         parent::__construct($attributes);
 
         $this->fireModelEvent('constructed', false);
+    }
+
+    /**
+     * Get an attribute from the model.
+     *
+     * @param  string $key
+     *
+     * @return mixed
+     */
+    public function getAttribute($key)
+    {
+        if (isset($this->decorated)) {
+            if ($this->hasDecoratedAttribute($key)) {
+                return $this->getDecoratedAttribute($key);
+            }
+        }
+
+        if (method_exists($this, 'getType')) {
+            if ($this->getType($key) instanceof ValueObjectType) {
+                return $this->getType($key)->cast($this->attributes[$key] ?? null);
+            }
+        }
+
+        return parent::getAttribute($key);
     }
 
     /**

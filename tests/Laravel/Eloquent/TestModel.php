@@ -21,7 +21,7 @@ use JTDSoft\Essentials\ValueObjects\Currency;
 
 class TestModel extends Model
 {
-    public function types()
+    public function types(): array
     {
         return [
             'integer'    => new IntegerType(),

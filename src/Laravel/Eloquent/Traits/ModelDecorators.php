@@ -40,22 +40,6 @@ trait ModelDecorators
     }
 
     /**
-     * Get an attribute from the model.
-     *
-     * @param  string $key
-     *
-     * @return mixed
-     */
-    public function getAttribute($key)
-    {
-        if ($this->hasDecoratedAttribute($key)) {
-            return $this->getDecoratedAttribute($key);
-        }
-
-        return parent::getAttribute($key);
-    }
-
-    /**
      * @param $key
      * @param $value
      */
