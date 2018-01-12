@@ -31,7 +31,7 @@ class ValueObjectType extends Type
 
     public function valueObject(string $valueObject)
     {
-        if (is_subclass_of($valueObject, ValueObject::class)) {
+        if (!is_subclass_of($valueObject, ValueObject::class)) {
             throw new Fatal('ValueObject value should be an instance of ValueObject!');
         }
 
