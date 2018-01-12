@@ -71,6 +71,24 @@ class Formatter
         return $formatted;
     }
 
+    public function temperature($temperature, $exclude_sign = false, $round = true, $with_decimals = true)
+    {
+        $temperature = $round ? round($temperature, 0) : $temperature;
+        if ($with_decimals) {
+            $whole     = intval($temperature / 100);
+            $decimals  = $temperature % 100;
+            $formatted = sprintf('%1$d.%2$02d', $whole, $decimals);
+        } else {
+            $formatted = round($temperature / 100);
+        }
+
+        if (!$exclude_sign) {
+            $formatted = $formatted . '°C';
+        }
+
+        return $formatted;
+    }
+
     public function number($number)
     {
         return number_format($number, 0, '.', '');
