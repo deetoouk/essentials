@@ -3,6 +3,7 @@
 namespace JTDSoft\Essentials\Laravel\Eloquent\Types;
 
 use JTDSoft\Essentials\Exceptions\Error;
+use Throwable;
 
 /**
  * Class Type
@@ -54,9 +55,13 @@ abstract class Type
     public function default($default)
     {
         if (!is_null($default)) {
-            $default = $this->cast($default);
+            try {
+                $this->validate($default);
+            } catch (Throwable $e) {
+                throw new Error('default value :error', ['error' => $e->getMessage()]);
+            }
 
-            $this->validate('default value', $default);
+            $default = $this->castFromPrimitive($default);
         } else {
             if (!$this->nullable) {
                 throw new Error('Default cannot be null it type is not declared as nullable!');
@@ -72,13 +77,12 @@ abstract class Type
     /**
      * Validates attribute with specified value
      *
-     * @param $attribute
      * @param $value
      *
      * @throws Error
      * @return mixed
      */
-    abstract public function validate($attribute, $value);
+    abstract public function validate($value);
 
     /**
      * Casts value
@@ -87,7 +91,7 @@ abstract class Type
      *
      * @return mixed
      */
-    public function cast($value)
+    public function castFromPrimitive($value)
     {
         return $value;
     }
@@ -99,7 +103,7 @@ abstract class Type
      *
      * @return mixed
      */
-    public function toPrimitive($value)
+    public function castToPrimitive($value)
     {
         return $value;
     }

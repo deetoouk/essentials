@@ -16,19 +16,19 @@ class EnumerableTypeTest extends TestCase
     {
         $obj = new EnumerableType(['one', 'two']);
 
-        $obj->validate('foo', 'one');
+        $obj->validate('one');
 
         $this->assertTrue(true);
     }
 
     /**
      * @expectedException \JTDSoft\Essentials\Exceptions\Error
-     * @expectedExceptionMessage foo has an invalid value
+     * @expectedExceptionMessage invalid value
      */
     public function test_fails_validates()
     {
         $obj = new EnumerableType(['one', 'two']);
 
-        $obj->validate('foo', 'some value');
+        $obj->validate('some value');
     }
 }

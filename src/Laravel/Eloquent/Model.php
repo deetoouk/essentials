@@ -3,11 +3,11 @@
 namespace JTDSoft\Essentials\Laravel\Eloquent;
 
 use Illuminate\Database\Eloquent\Model as LaravelModel;
+use JTDSoft\Essentials\Exceptions\Error;
 use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelDecorators;
 use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelFilters;
 use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelRelationships;
 use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelTypes;
-use JTDSoft\Essentials\Laravel\Eloquent\Types\ValueObjectType;
 
 /**
  * Class Base
@@ -49,6 +49,7 @@ abstract class Model extends LaravelModel
      * @param  string $key
      *
      * @return mixed
+     * @throws Error
      */
     public function getAttribute($key)
     {
@@ -58,9 +59,23 @@ abstract class Model extends LaravelModel
             }
         }
 
-        if (method_exists($this, 'getType')) {
-            if ($this->getType($key) instanceof ValueObjectType) {
-                return $this->getType($key)->cast($this->attributes[$key] ?? null);
+        if ($this->hasType($key)) {
+            if ($this->hasError($key)) {
+                throw new Error(':attribute error: :error', compact(':attribute', ['error' => $this->getError($key)]));
+            }
+
+            $value = $this->attributes[$key] ?? null;
+
+            if (is_null($value)) {
+                return $value;
+            }
+
+            $casted = $this->getType($key)->castFromPrimitive($value);
+
+            if ($this->hasGetMutator($key)) {
+                return $this->mutateAttribute($key, $casted);
+            } else {
+                return $casted;
             }
         }
 

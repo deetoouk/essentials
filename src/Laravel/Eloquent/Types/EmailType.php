@@ -11,10 +11,10 @@ use JTDSoft\Essentials\Exceptions\Error;
  */
 class EmailType extends Type
 {
-    public function validate($attribute, $value)
+    public function validate($value)
     {
         if (filter_var($value, FILTER_VALIDATE_EMAIL) === false) {
-            throw new Error(':attribute must be a valid email address', compact('attribute'));
+            throw new Error('must be a valid email address');
         }
     }
 }

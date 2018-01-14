@@ -11,23 +11,19 @@ use JTDSoft\Essentials\Exceptions\Error;
  */
 class IpType extends Type
 {
-    public function validate($attribute, $value)
+    public function validate($value)
     {
         if (filter_var($value, FILTER_VALIDATE_IP) === false) {
-            throw new Error(':attribute must be a valid ip address', compact('attribute'));
+            throw new Error('must be a valid ip address');
         }
     }
 
-    public function cast($value)
+    public function castFromPrimitive($value)
     {
-        if (is_string($value)) {
-            return $value;
-        }
-
         return long2ip($value);
     }
 
-    public function toPrimitive($value)
+    public function castToPrimitive($value)
     {
         return ip2long($value);
     }

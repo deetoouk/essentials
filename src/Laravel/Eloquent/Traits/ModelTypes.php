@@ -1,11 +1,16 @@
 <?php namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
 
+use DateTime;
+use Illuminate\Support\Str;
 use JTDSoft\Essentials\Exceptions\Error;
+use JTDSoft\Essentials\Exceptions\Errors;
+use JTDSoft\Essentials\Exceptions\Fatal;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\DateTimeType;
-use JTDSoft\Essentials\Laravel\Eloquent\Types\DateType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\IntegerType;
-use JTDSoft\Essentials\Laravel\Eloquent\Types\ValueObjectType;
+use JTDSoft\Essentials\Laravel\Eloquent\Types\RelationType;
 use JTDSoft\Essentials\ValueObjects\ValueObject;
+use stdClass;
+use Throwable;
 
 /**
  * Class ModelTypes
@@ -18,6 +23,11 @@ trait ModelTypes
      * @var bool
      */
     public $validates = true;
+
+    /**
+     * @var array
+     */
+    protected $errors = [];
 
     /**
      * @var array
@@ -54,22 +64,16 @@ trait ModelTypes
             'id' => (new IntegerType())->unsigned(true),
         ];
 
-        $this->types = array_merge($defaultTypes, $this->types(), $this->types);
-
         if ($this->timestamps) {
-            $types['updated_at'] = new DateTimeType();
-            $types['created_at'] = new DateTimeType();
+            $defaultTypes['updated_at'] = new DateTimeType();
+            $defaultTypes['created_at'] = new DateTimeType();
         }
+
+        $this->types = array_merge($defaultTypes, $this->types(), $this->types);
 
         foreach ($this->types as $attribute => $type) {
             if (!in_array($attribute, $this->guarded)) {
                 $this->fillable[] = $attribute;
-            }
-
-            if (($type instanceof DateTimeType || $type instanceof DateType) &&
-                !in_array($attribute, $this->getDates())
-            ) {
-                $this->dates[] = $attribute;
             }
         }
 
@@ -96,26 +100,40 @@ trait ModelTypes
 
     /**
      * @return $this
-     * @throws Error
+     * @throws Errors
      */
     public function validate()
     {
         $types = array_except($this->types, ['id']);
 
-        foreach ($types as $attribute => $type) {
-            $value = $this->attributes[$attribute] ?? null;
+        foreach ($types as $key => $type) {
+            if ($this->hasError($key)) {
+                continue;
+            }
+
+            $value = $this->attributes[$key] ?? null;
 
             if (is_null($value)) {
                 if (!$type->nullable && !$type->has_default) {
-                    throw new Error(':attribute is required', ['attribute' => $attribute]);
+                    $this->recordError($key, __(':key is required', compact('key')));
                 }
 
                 continue;
             }
 
-            if ($this->isDirty($attribute)) {
-                $type->validate($attribute, $value);
+            if ($type instanceof RelationType) {
+                $relation = camel_case(Str::replaceLast('_id', '', $key));
+
+                $exists = $this->$relation()->exists();
+
+                if (!$exists) {
+                    $this->recordError($key, __(':key relation #:value does not exist', compact('key', 'value')));
+                }
             }
+        }
+
+        if ($this->hasErrors()) {
+            throw new Errors($this->getErrors());
         }
 
         return $this;
@@ -135,7 +153,7 @@ trait ModelTypes
 
         $type = $this->types[$key] ?? null;
 
-        return $type->cast($value);
+        return $type->castFromPrimitive($value);
     }
 
     /**
@@ -144,10 +162,12 @@ trait ModelTypes
      * @param  string $key
      * @param  mixed $value
      *
-     * @return void
+     * @return self
      */
     public function setAttribute($key, $value)
     {
+        $this->clearError($key);
+
         if (is_scalar($value)) {
             if (is_string($value)) {
                 $value = trim($value);
@@ -158,23 +178,35 @@ trait ModelTypes
             }
         }
 
-        if (is_null($value)) {
-            return parent::setAttribute($key, $value);
+        if ($this->hasSetMutator($key)) {
+            $method = 'set' . Str::studly($key) . 'Attribute';
+
+            $value = $this->{$method}($value);
         }
 
-        $type = $this->types[$key] ?? null;
+        if (!is_null($value)) {
+            try {
+                $type = $this->getType($key);
 
-        if (!$type) {
-            return parent::setAttribute($key, $value);
+                if ($type) {
+                    $type->validate($value);
+
+                    $value = $type->castToPrimitive($value);
+
+                    if (!is_scalar($value)) {
+                        throw new Fatal('Primitive value is not a scalar value!');
+                    }
+                }
+            } catch (Throwable $e) {
+                $this->recordError($key, $e->getMessage());
+
+                $value = null;
+            }
         }
 
-        if (!$this->hasSetMutator($key)) {
-            $value = $type->toPrimitive($type->cast($value));
+        $this->attributes[$key] = $value;
 
-            assert(is_scalar($value), 'Primitive value is not a scalar value!');
-        }
-
-        return parent::setAttribute($key, $value);
+        return $this;
     }
 
     /**
@@ -226,19 +258,26 @@ trait ModelTypes
         $attributes = parent::attributesToArray();
 
         foreach ($attributes as $key => $value) {
-            if ($this->getType($key) instanceof ValueObjectType) {
+            if (is_null($value)) {
                 $attributes[$key] = $value;
 
-                $valueObject = $this->getType($key)->cast($value);
-                foreach ($valueObject->serialize as $name) {
-                    $attributes[$key . '_' . $name] = $valueObject->{$name};
-                }
-            } elseif ($value instanceof ValueObject) {
-                $attributes[$key] = $value->toPrimitive();
+                continue;
+            }
 
-                foreach ($value->serialize as $name) {
-                    $attributes[$key . '_' . $name] = $value->{$name};
-                }
+            $type = $this->getType($key);
+
+            if ($type) {
+                $value = $type->castFromPrimitive($value);
+            }
+
+            if ($value instanceof ValueObject) {
+                $attributes[$key] = $value->value;
+            } elseif ($value instanceof DateTime) {
+                $attributes[$key] = $value->format($type->format ?? DateTime::W3C);
+            } elseif (is_object($value) && get_class($value) === stdClass::class) {
+                $attributes[$key] = (array)$value;
+            } else {
+                $attributes[$key] = $value;
             }
         }
 
@@ -265,5 +304,35 @@ trait ModelTypes
         }
 
         return parent::save($options);
+    }
+
+    protected function clearError($key)
+    {
+        $this->errors = array_forget($this->errors, $key) ?? [];
+    }
+
+    protected function recordError($key, $message)
+    {
+        $this->errors[$key] = $message;
+    }
+
+    public function hasError($key)
+    {
+        return array_has($this->errors, $key);
+    }
+
+    public function getError($key)
+    {
+        return array_get($this->errors, $key);
+    }
+
+    public function hasErrors()
+    {
+        return !empty($this->errors);
+    }
+
+    public function getErrors()
+    {
+        return $this->errors;
     }
 }

@@ -18,22 +18,22 @@ class ArrayTypeTest extends TestCase
 
         $value = ['foo' => 'bar'];
 
-        $primitive = $obj->toPrimitive(['foo' => 'bar']);
+        $primitive = $obj->castToPrimitive(['foo' => 'bar']);
 
         $this->assertSame($primitive, json_encode($value));
     }
 
-    public function test_cast()
+    public function test_cast_from_primitive()
     {
         $obj = new ArrayType();
 
         $value = ['foo' => 'bar'];
 
-        $result = $obj->cast($value);
+        $result = $obj->castFromPrimitive(json_encode($value));
 
         $this->assertSame($result, $value);
 
-        $result = $obj->cast(json_encode($value));
+        $result = $obj->castFromPrimitive(json_encode($value));
 
         $this->assertSame($result, $value);
     }
@@ -42,19 +42,19 @@ class ArrayTypeTest extends TestCase
     {
         $obj = new ArrayType();
 
-        $obj->validate('foo', ['foo' => 'bar']);
+        $obj->validate(['foo' => 'bar']);
 
         $this->assertTrue(true);
     }
 
     /**
      * @expectedException \JTDSoft\Essentials\Exceptions\Error
-     * @expectedExceptionMessage foo must be an array
+     * @expectedExceptionMessage must be an array
      */
     public function test_fails_validates()
     {
         $obj = new ArrayType();
 
-        $obj->validate('foo', 'some string');
+        $obj->validate('some string');
     }
 }

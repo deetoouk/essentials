@@ -18,22 +18,22 @@ class ObjectTypeTest extends TestCase
 
         $value = (object)['foo' => 'bar'];
 
-        $primitive = $obj->toPrimitive($value);
+        $primitive = $obj->castToPrimitive($value);
 
         $this->assertSame($primitive, json_encode($value));
     }
 
-    public function test_cast()
+    public function test_cast_from_primitive()
     {
         $obj = new ObjectType();
 
         $value = ['foo' => 'bar'];
 
-        $result = $obj->cast($value);
+        $result = $obj->castFromPrimitive(json_encode($value));
 
         $this->assertEquals($result, (object)$value);
 
-        $result = $obj->cast(json_encode($value));
+        $result = $obj->castFromPrimitive(json_encode($value));
 
         $this->assertEquals($result, (object)$value);
     }
@@ -42,19 +42,19 @@ class ObjectTypeTest extends TestCase
     {
         $obj = new ObjectType();
 
-        $obj->validate('foo', (object)['foo' => 'bar']);
+        $obj->validate((object)['foo' => 'bar']);
 
         $this->assertTrue(true);
     }
 
     /**
      * @expectedException \JTDSoft\Essentials\Exceptions\Error
-     * @expectedExceptionMessage foo must be an object
+     * @expectedExceptionMessage must be an object
      */
     public function test_fails_validates()
     {
         $obj = new ObjectType();
 
-        $obj->validate('foo', 'some string');
+        $obj->validate('some string');
     }
 }

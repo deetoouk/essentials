@@ -18,18 +18,18 @@ class DateTimeTypeTest extends TestCase
         $obj = new DateTimeType();
 
         $now = new DateTime();
-        $this->assertSame($obj->toPrimitive(new $now), $now->format(DateTimeType::$format));
+        $this->assertSame($obj->castToPrimitive(new $now), $now->format(DateTimeType::$format));
     }
 
-    public function test_cast()
+    public function test_cast_from_primitive()
     {
         $obj = new DateTimeType();
 
         $now = new DateTime();
 
-        $this->assertSame($obj->cast($now)->getTimestamp(), $now->getTimestamp());
+        $this->assertSame($obj->castFromPrimitive($now->format($obj::$format))->getTimestamp(), $now->getTimestamp());
 
-        $cast = $obj->cast($now->format(DateTimeType::$format));
+        $cast = $obj->castFromPrimitive($now->format(DateTimeType::$format));
 
         $this->assertInstanceOf(DateTime::class, $cast);
         $this->assertSame($cast->getTimestamp(), $now->getTimestamp());
@@ -39,19 +39,19 @@ class DateTimeTypeTest extends TestCase
     {
         $obj = new DateTimeType();
 
-        $obj->validate('foo', new DateTime());
+        $obj->validate(new DateTime());
 
         $this->assertTrue(true);
     }
 
     /**
      * @expectedException \JTDSoft\Essentials\Exceptions\Error
-     * @expectedExceptionMessage foo must be a date time object
+     * @expectedExceptionMessage must be a date time
      */
     public function test_fails_validates()
     {
         $obj = new DateTimeType();
 
-        $obj->validate('foo', 'some string');
+        $obj->validate('some string');
     }
 }

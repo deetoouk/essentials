@@ -37,7 +37,7 @@ abstract class ValueObject implements JsonSerializable
         return $this->value;
     }
 
-    public function toPrimitive()
+    public function castToPrimitive()
     {
         return $this->value;
     }
@@ -68,6 +68,8 @@ abstract class ValueObject implements JsonSerializable
     public function toArray()
     {
         $serialized = [];
+
+        $serialized['value'] = $this->value;
 
         foreach ($this->serialize as $name) {
             $serialized[$name] = $this->{$name};

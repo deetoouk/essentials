@@ -11,25 +11,19 @@ use JTDSoft\Essentials\Exceptions\Error;
  */
 class ArrayType extends Type
 {
-    public function validate($attribute, $value)
+    public function validate($value)
     {
         if (!is_array($value)) {
-            throw new Error(':attribute must be an array', compact('attribute'));
+            throw new Error('must be an array');
         }
     }
 
-    public function cast($value)
+    public function castFromPrimitive($value)
     {
-        if (is_array($value)) {
-            return $value;
-        } elseif (is_string($value)) {
-            return json_decode($value, true);
-        }
-
-        throw new Error('Invalid value :value', compact('value'));
+        return json_decode($value, true);
     }
 
-    public function toPrimitive($value)
+    public function castToPrimitive($value)
     {
         return json_encode($value);
     }
