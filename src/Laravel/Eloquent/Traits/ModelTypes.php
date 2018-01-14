@@ -107,7 +107,7 @@ trait ModelTypes
 
             if (is_null($value)) {
                 if (!$type->nullable && !$type->has_default) {
-                    throw new Error(':attribute is required');
+                    throw new Error(':attribute is required', ['attribute' => $attribute]);
                 }
 
                 continue;
