@@ -45,10 +45,10 @@ class StringType extends Type
         return $this;
     }
 
-    public function validate($attribute, $value)
+    public function validate($value)
     {
         if (!is_string($value)) {
-            throw new Error(':attribute must be a string');
+            throw new Error('must be a string');
         }
     }
 }

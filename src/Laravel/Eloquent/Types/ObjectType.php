@@ -11,27 +11,19 @@ use JTDSoft\Essentials\Exceptions\Error;
  */
 class ObjectType extends Type
 {
-    public function validate($attribute, $value)
+    public function validate($value)
     {
-        if (!is_object($value)) {
-            throw new Error(':attribute must be an object', compact('attribute'));
+        if (!is_object($value) && !is_array($value)) {
+            throw new Error('must be an object');
         }
     }
 
-    public function cast($value)
+    public function castFromPrimitive($value)
     {
-        if (is_object($value)) {
-            return $value;
-        } elseif (is_array($value)) {
-            return (object)$value;
-        } elseif (is_string($value)) {
-            return (object)json_decode($value);
-        }
-
-        throw new Error('Invalid value :value', compact($value));
+        return (object)json_decode($value);
     }
 
-    public function toPrimitive($value)
+    public function castToPrimitive($value)
     {
         return json_encode($value);
     }

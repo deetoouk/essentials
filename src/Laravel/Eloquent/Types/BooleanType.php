@@ -11,24 +11,20 @@ use JTDSoft\Essentials\Exceptions\Error;
  */
 class BooleanType extends Type
 {
-    public function validate($attribute, $value)
+    public function validate($value)
     {
-        if (!is_bool($value)) {
-            throw new Error(':attribute must be boolean', compact('attribute'));
+        if (filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) === null) {
+            throw new Error('must be boolean');
         }
     }
 
-    public function cast($value)
+    public function castFromPrimitive($value)
     {
-        if (is_bool($value)) {
-            return $value;
-        }
-
-        return filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+        return $value === '1' ? true : false;
     }
 
-    public function toPrimitive($value)
+    public function castToPrimitive($value)
     {
-        return $value ? 1 : 0;
+        return filter_var($value, FILTER_VALIDATE_BOOLEAN) ? '1' : '0';
     }
 }

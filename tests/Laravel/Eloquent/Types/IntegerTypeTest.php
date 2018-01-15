@@ -16,74 +16,74 @@ class IntegerTypeTest extends TestCase
     {
         $obj = new IntegerType();
 
-        $obj->validate('foo', 1);
+        $obj->validate(1);
 
         $this->assertTrue(true);
     }
 
     /**
      * @expectedException \JTDSoft\Essentials\Exceptions\Error
-     * @expectedExceptionMessage foo must be integer
+     * @expectedExceptionMessage must be integer
      */
     public function test_fails_validates()
     {
         $obj = new IntegerType();
 
-        $obj->validate('foo', 'some value');
+        $obj->validate('some value');
     }
 
     /**
      * @expectedException \JTDSoft\Essentials\Exceptions\Error
-     * @expectedExceptionMessage foo cannot be more than 5
+     * @expectedExceptionMessage cannot be more than 5
      */
     public function test_validation_fails_if_value_more_than_max()
     {
         $obj = (new IntegerType())->max(5);
 
-        $obj->validate('foo', 6);
+        $obj->validate(6);
     }
 
     /**
      * @expectedException \JTDSoft\Essentials\Exceptions\Error
-     * @expectedExceptionMessage foo cannot be less than 2
+     * @expectedExceptionMessage cannot be less than 2
      */
     public function test_validation_fails_if_value_lass_than_min()
     {
         $obj = (new IntegerType())->min(2);
 
-        $obj->validate('foo', 1);
+        $obj->validate(1);
     }
 
     /**
      * @expectedException \JTDSoft\Essentials\Exceptions\Error
-     * @expectedExceptionMessage foo cannot be less than 0
+     * @expectedExceptionMessage cannot be less than 0
      */
     public function test_validation_fails_if_value_lass_than_0_when_unsigned()
     {
         $obj = (new IntegerType())->unsigned();
 
-        $obj->validate('foo', -1);
+        $obj->validate(-1);
     }
 
     /**
      * @expectedException \JTDSoft\Essentials\Exceptions\Error
-     * @expectedExceptionMessage foo cannot be more than 2147483647
+     * @expectedExceptionMessage cannot be more than 2147483647
      */
     public function test_validation_cannot_be_more_than_type_max()
     {
         $obj = (new IntegerType());
 
-        $obj->validate('foo', 2 ** 33);
+        $obj->validate(2 ** 33);
     }
 
     /**
      * @expectedException \JTDSoft\Essentials\Exceptions\Error
-     * @expectedExceptionMessage foo cannot be less than -2147483648
+     * @expectedExceptionMessage cannot be less than -2147483648
      */
     public function test_validation_cannot_be_lass_than_type_max()
     {
         $obj = (new IntegerType());
 
-        $obj->validate('foo', - 2 ** 33);
+        $obj->validate(- 2 ** 33);
     }
 }

@@ -2,53 +2,15 @@
 
 namespace JTDSoft\Essentials\Laravel\Eloquent\Types;
 
-use JTDSoft\Essentials\Exceptions\Error;
-
 /**
  * Class TextType
  *
  * @package JTDSoft\Essentials\Laravel\Eloquent\Types
  */
-class TextType extends Type
+class TextType extends StringType
 {
     /**
      * @var integer
      */
-    public $min;
-
-    /**
-     * @var integer
-     */
-    public $max;
-
-    /**
-     * @param int $max
-     *
-     * @return $this
-     */
-    public function max(int $max)
-    {
-        $this->max = $max;
-
-        return $this;
-    }
-
-    /**
-     * @param int $min
-     *
-     * @return $this
-     */
-    public function min(int $min)
-    {
-        $this->min = $min;
-
-        return $this;
-    }
-
-    public function validate($attribute, $value)
-    {
-        if (!is_string($value)) {
-            throw new Error(':attribute must be a string');
-        }
-    }
+    public $max = 65535;
 }

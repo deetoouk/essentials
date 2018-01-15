@@ -72,65 +72,43 @@ class IntegerType extends Type
         return $this;
     }
 
-    public function validate($attribute, $value)
+    public function validate($value)
     {
         if (filter_var($value, FILTER_VALIDATE_INT) === false) {
-            throw new Error(':attribute must be integer', compact('attribute'));
+            throw new Error('must be integer');
         }
 
         if (isset($this->max) && $value > $this->max) {
-            throw new Error(
-                ':attribute cannot be more than :max',
-                compact('attribute') + ['max' => $this->max]
-            );
+            throw new Error('cannot be more than :max', ['max' => $this->max]);
         }
 
         if (isset($this->min) && $value < $this->min) {
-            throw new Error(
-                ':attribute cannot be less than :min',
-                compact('attribute') + ['min' => $this->min]
-            );
+            throw new Error('cannot be less than :min', ['min' => $this->min]);
         }
 
         if ($this->unsigned) {
             if ($value < 0) {
-                throw new Error(
-                    ':attribute cannot be less than 0',
-                    compact('attribute')
-                );
+                throw new Error('cannot be less than 0');
             }
 
             $unsigned_max = self::TYPE_MAX + abs(self::TYPE_MIN);
 
             if ($value > $unsigned_max) {
-                throw new Error(
-                    ':attribute cannot be more than :max',
-                    compact('attribute') + ['max' => $unsigned_max]
-                );
+                throw new Error('cannot be more than :max', ['max' => $unsigned_max]);
             }
         } else {
             if ($value < self::TYPE_MIN) {
-                throw new Error(
-                    ':attribute cannot be less than :min',
-                    compact('attribute') + ['min' => self::TYPE_MIN]
-                );
+                throw new Error('cannot be less than :min', ['min' => self::TYPE_MIN]);
             }
 
             if ($value > self::TYPE_MAX) {
-                throw new Error(
-                    ':attribute cannot be more than :max',
-                    compact('attribute') + ['max' => self::TYPE_MAX]
-                );
+                throw new Error('cannot be more than :max', ['max' => self::TYPE_MAX]);
             }
         }
     }
 
-    public function cast($value)
+    public function castFromPrimitive($value)
     {
-        if (is_int($value)) {
-            return $value;
-        }
-
         return intval($value);
     }
 }

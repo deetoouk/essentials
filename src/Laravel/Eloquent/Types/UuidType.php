@@ -9,14 +9,14 @@ use JTDSoft\Essentials\Exceptions\Error;
  *
  * @package JTDSoft\Essentials\Laravel\Eloquent\Types
  */
-class UuidType extends Type
+class UuidType extends StringType
 {
     public static $pattern = '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}';
 
-    public function validate($attribute, $value)
+    public function validate($value)
     {
         if (!preg_match('/^' . self::$pattern . '$/i', $value)) {
-            throw new Error(':attribute must be a valid uuid', compact('attribute'));
+            throw new Error('must be a valid uuid');
         }
     }
 }

@@ -82,7 +82,7 @@ class Colour extends ValueObject
         return $this->value;
     }
 
-    public function toPrimitive(): string
+    public function castToPrimitive(): string
     {
         return implode(array_values($this->value));
     }

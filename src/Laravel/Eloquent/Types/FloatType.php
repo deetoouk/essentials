@@ -62,40 +62,27 @@ class FloatType extends Type
         return $this;
     }
 
-    public function validate($attribute, $value)
+    public function validate($value)
     {
         if (filter_var($value, FILTER_VALIDATE_FLOAT) === false) {
-            throw new Error(':attribute must be float', compact('attribute'));
+            throw new Error('must be float');
         }
 
         if (isset($this->max) && $value > $this->max) {
-            throw new Error(
-                ':attribute cannot be more than :max',
-                compact('attribute') + ['max' => $this->max]
-            );
+            throw new Error('cannot be more than :max', ['max' => $this->max]);
         }
 
         if ($this->unsigned && $value < 0) {
-            throw new Error(
-                ':attribute cannot be less than 0',
-                compact('attribute')
-            );
+            throw new Error('cannot be less than 0');
         }
 
         if (isset($this->min) && $value < $this->min) {
-            throw new Error(
-                ':attribute cannot be less than :min',
-                compact('attribute') + ['min' => $this->min]
-            );
+            throw new Error('cannot be less than :min', ['min' => $this->min]);
         }
     }
 
-    public function cast($value)
+    public function castFromPrimitive($value)
     {
-        if (is_float($value)) {
-            return $value;
-        }
-
         return floatval($value);
     }
 }

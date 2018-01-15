@@ -9,12 +9,12 @@ use JTDSoft\Essentials\Exceptions\Error;
  *
  * @package JTDSoft\Essentials\Laravel\Eloquent\Types
  */
-class UrlType extends Type
+class UrlType extends StringType
 {
-    public function validate($attribute, $value)
+    public function validate($value)
     {
         if (filter_var($value, FILTER_VALIDATE_URL) === false) {
-            throw new Error(':attribute must be a valid url', compact('attribute'));
+            throw new Error('must be a valid url');
         }
     }
 }

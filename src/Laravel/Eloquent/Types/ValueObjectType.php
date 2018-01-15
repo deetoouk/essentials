@@ -5,6 +5,7 @@ namespace JTDSoft\Essentials\Laravel\Eloquent\Types;
 use JTDSoft\Essentials\Exceptions\Error;
 use JTDSoft\Essentials\Exceptions\Fatal;
 use JTDSoft\Essentials\ValueObjects\ValueObject;
+use Throwable;
 
 /**
  * Class ValueObjectType
@@ -38,27 +39,34 @@ class ValueObjectType extends Type
         $this->valueObject = $valueObject;
     }
 
-    public function validate($attribute, $value)
+    public function validate($value)
     {
-        //nothing to do here. Validation done by value object constructor
-        if (!is_scalar($value)) {
-            throw new Error(':attribute must be an scalar value after casting for ValueObject' . $this->valueObject);
+        if (!$value instanceof $this->valueObject) {
+            return; //all fine here
+        }
+
+        try {
+            $valueObject = $this->valueObject;
+
+            new $valueObject($value);
+        } catch (Throwable $e) {
+            throw new Error('is invalid!');
         }
     }
 
-    public function cast($value)
+    public function castFromPrimitive($primitive)
     {
-        $object = $this->valueObject;
-
-        if ($value instanceof $object) {
-            return $value;
-        }
-
-        return new $object($value);
+        return new $this->valueObject($primitive);
     }
 
-    public function toPrimitive($value)
+    public function castToPrimitive($value)
     {
-        return $value->toPrimitive();
+        if (!$value instanceof $this->valueObject) {
+            $valueObject = $this->valueObject;
+
+            $value = (new $valueObject($value));
+        }
+
+        return $value->castToPrimitive();
     }
 }

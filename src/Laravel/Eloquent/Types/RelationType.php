@@ -11,7 +11,7 @@ use JTDSoft\Essentials\Exceptions\Fatal;
  *
  * @package JTDSoft\Essentials\Laravel\Eloquent\Types
  */
-class RelationType extends Type
+class RelationType extends StringType
 {
     public $relation;
 
@@ -36,16 +36,12 @@ class RelationType extends Type
         $this->relation = $relation;
     }
 
-    public function validate($attribute, $value)
+    public function validateSave($value)
     {
-        if (!is_subclass_of($this->relation, Model::class) && $this->relation !== Model::class) {
-            throw new Error(':attribute must be an instance of ' . $this->relation);
-        }
-
         $exists = (new $this->relation)->whereId($value)->exists();
 
         if (!$exists) {
-            throw new Error(':attribute relation #:value does not exist', compact('attribute', 'value'));
+            throw new Error('relation #:value does not exist', compact('value'));
         }
     }
 }

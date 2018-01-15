@@ -2,6 +2,7 @@
 
 namespace Tests\Illuminate\Database\Eloquent;
 
+use JTDSoft\Essentials\Laravel\Eloquent\Model;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\ArrayType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\BooleanType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\DateTimeType;
@@ -16,7 +17,6 @@ use JTDSoft\Essentials\Laravel\Eloquent\Types\StringType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\TextType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\UrlType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\ValueObjectType;
-use JTDSoft\Essentials\Laravel\Eloquent\Model;
 use JTDSoft\Essentials\ValueObjects\Currency;
 
 class TestModel extends Model
@@ -24,20 +24,20 @@ class TestModel extends Model
     public function types(): array
     {
         return [
-            'integer'    => new IntegerType(),
-            'float'      => new FloatType(),
-            'string'     => new StringType(),
-            'boolean'    => new BooleanType(),
-            'datetime'   => new DateTimeType(),
-            'date'       => new DateType(),
-            'email'      => new EmailType(),
-            'enumerable' => new EnumerableType(['one', 'two']),
-            'array'      => new ArrayType(),
-            'object'     => new ObjectType(),
-            'relation'   => new RelationType(self::class),
-            'text'       => new TextType(),
-            'url'        => new UrlType(),
-            'vo'         => new ValueObjectType(Currency::class),
+            'integer'     => new IntegerType(),
+            'float'       => new FloatType(),
+            'string'      => new StringType(),
+            'boolean'     => new BooleanType(),
+            'datetime'    => new DateTimeType(),
+            'date'        => new DateType(),
+            'email'       => new EmailType(),
+            'enumerable'  => new EnumerableType(['one', 'two']),
+            'array'       => new ArrayType(),
+            'object'      => new ObjectType(),
+            'relation_id' => new RelationType(self::class),
+            'text'        => new TextType(),
+            'url'         => new UrlType(),
+            'vo'          => new ValueObjectType(Currency::class),
         ];
     }
 }

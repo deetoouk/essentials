@@ -16,19 +16,19 @@ class EmailTypeTest extends TestCase
     {
         $obj = new EmailType();
 
-        $obj->validate('foo', 'jordan.dobrev.88@gmail.com');
+        $obj->validate('jordan.dobrev.88@gmail.com');
 
         $this->assertTrue(true);
     }
 
     /**
      * @expectedException \JTDSoft\Essentials\Exceptions\Error
-     * @expectedExceptionMessage foo must be a valid email address
+     * @expectedExceptionMessage must be a valid email address
      */
     public function test_fails_validates()
     {
         $obj = new EmailType();
 
-        $obj->validate('foo', 'some string');
+        $obj->validate('some string');
     }
 }
