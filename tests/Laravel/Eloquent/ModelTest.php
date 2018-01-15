@@ -40,8 +40,6 @@ class ModelTest extends TestCase
         $model->vo          = 'bgn';
         $model->relation_id = '1';
 
-        dd($model->toArray());
-
         $this->assertInternalType('boolean', $model->boolean);
         $this->assertInternalType('integer', $model->integer);
         $this->assertInternalType('float', $model->float);
