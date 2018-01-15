@@ -273,7 +273,7 @@ trait ModelTypes
             if ($value instanceof ValueObject) {
                 $attributes[$key] = $value->value;
             } elseif ($value instanceof DateTime) {
-                $attributes[$key] = $value->format($type::$format ?? DateTime::W3C);
+                $attributes[$key] = $value->format($type::$format ?? 'Y-m-d H:i:s');
             } elseif (is_object($value) && get_class($value) === stdClass::class) {
                 $attributes[$key] = (array)$value;
             } else {
