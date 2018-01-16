@@ -65,8 +65,8 @@ trait ModelTypes
         ];
 
         if ($this->timestamps) {
-            $defaultTypes['updated_at'] = new DateTimeType();
-            $defaultTypes['created_at'] = new DateTimeType();
+            $defaultTypes[self::UPDATED_AT] = new DateTimeType();
+            $defaultTypes[self::CREATED_AT] = new DateTimeType();
         }
 
         $this->types = array_merge($defaultTypes, $this->types(), $this->types);
@@ -109,6 +109,12 @@ trait ModelTypes
         foreach ($types as $key => $type) {
             if ($this->hasError($key)) {
                 continue;
+            }
+
+            if (in_array($key, [self::CREATED_AT, self::UPDATED_AT])) {
+                if (!$this->isDirty($key)) {
+                    continue;
+                }
             }
 
             $value = $this->attributes[$key] ?? null;
