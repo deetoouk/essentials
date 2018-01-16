@@ -41,7 +41,7 @@ class ValueObjectType extends Type
 
     public function validate($value)
     {
-        if (!$value instanceof $this->valueObject) {
+        if ($value instanceof $this->valueObject) {
             return; //all fine here
         }
 
