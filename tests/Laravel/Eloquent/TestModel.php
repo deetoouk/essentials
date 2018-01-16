@@ -18,6 +18,7 @@ use JTDSoft\Essentials\Laravel\Eloquent\Types\TextType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\UrlType;
 use JTDSoft\Essentials\Laravel\Eloquent\Types\ValueObjectType;
 use JTDSoft\Essentials\ValueObjects\Currency;
+use JTDSoft\Essentials\ValueObjects\Temperature;
 
 class TestModel extends Model
 {
@@ -38,6 +39,7 @@ class TestModel extends Model
             'text'        => new TextType(),
             'url'         => new UrlType(),
             'vo'          => new ValueObjectType(Currency::class),
+            'temp'        => new ValueObjectType(Temperature::class),
         ];
     }
 }

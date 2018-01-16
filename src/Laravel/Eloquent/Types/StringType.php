@@ -47,8 +47,13 @@ class StringType extends Type
 
     public function validate($value)
     {
-        if (!is_string($value)) {
+        if (!is_scalar($value)) {
             throw new Error('must be a string');
         }
+    }
+
+    public function castToPrimitive($value)
+    {
+        return strval($value);
     }
 }

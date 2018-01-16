@@ -4,6 +4,7 @@ namespace Tests\JTDSoft\Essentials\Laravel\Eloquent\Types;
 
 use DateTime;
 use JTDSoft\Essentials\ValueObjects\Currency;
+use JTDSoft\Essentials\ValueObjects\Temperature;
 use Tests\Illuminate\Database\Eloquent\TestModel;
 use Tests\TestCase;
 
@@ -25,19 +26,20 @@ class ModelTest extends TestCase
     {
         $model = new TestModel();
 
-        $model->boolean     = 'on';
-        $model->integer     = '2';
-        $model->float       = '2';
-        $model->string      = '2';
-        $model->date        = '2017-01-02';
-        $model->datetime    = '2017-01-02 00:00:00';
-        $model->email       = 'jordan.dobrev.88@gmail.com';
-        $model->enumerable  = 'one';
-        $model->array       = ['one'];
-        $model->object      = ['object'];
-        $model->text        = 'adat';
-        $model->url         = 'http://www.abv.bg';
-        $model->vo          = 'bgn';
+        $model->boolean    = 'on';
+        $model->integer    = '2';
+        $model->float      = '2';
+        $model->string     = '2';
+        $model->date       = '2017-01-02';
+        $model->datetime   = '2017-01-02 00:00:00';
+        $model->email      = 'jordan.dobrev.88@gmail.com';
+        $model->enumerable = 'one';
+        $model->array      = ['one'];
+        $model->object     = ['object'];
+        $model->text       = 'adat';
+        $model->url        = 'http://www.abv.bg';
+        $model->vo         = 'bgn';
+        $model->temp       = 12;
         $model->relation_id = '1';
 
         $this->assertInternalType('boolean', $model->boolean);
@@ -53,6 +55,14 @@ class ModelTest extends TestCase
         $this->assertInternalType('string', $model->text);
         $this->assertInternalType('string', $model->url);
         $this->assertInstanceOf(Currency::class, $model->vo);
+        $this->assertInstanceOf(Temperature::class, $model->temp);
+        $this->assertInternalType('string', $model->relation_id);
+
+        $relation     = new TestModel();
+        $relation->id = '2';
+
+        $model->relation()->associate($relation);
+
         $this->assertInternalType('string', $model->relation_id);
 
         $array = $model->toArray();
@@ -70,6 +80,7 @@ class ModelTest extends TestCase
         $this->assertInternalType('string', $array['text']);
         $this->assertInternalType('string', $array['url']);
         $this->assertInternalType('string', $array['vo']);
+        $this->assertInternalType('integer', $array['temp']);
         $this->assertInternalType('string', $array['relation_id']);
 
         $model = new TestModel();
@@ -87,6 +98,7 @@ class ModelTest extends TestCase
         $model->text        = null;
         $model->url         = null;
         $model->vo          = null;
+        $model->temp        = null;
         $model->relation_id = null;
 
         $this->assertNull($model->boolean);
@@ -102,6 +114,7 @@ class ModelTest extends TestCase
         $this->assertNull($model->text);
         $this->assertNull($model->url);
         $this->assertNull($model->vo);
+        $this->assertNull($model->temp);
         $this->assertNull($model->relation_id);
 
         $array = $model->toArray();
@@ -119,6 +132,7 @@ class ModelTest extends TestCase
         $this->assertNull($array['text']);
         $this->assertNull($array['url']);
         $this->assertNull($array['vo']);
+        $this->assertNull($array['temp']);
         $this->assertNull($array['relation_id']);
     }
 }

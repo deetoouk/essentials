@@ -35,13 +35,4 @@ class RelationType extends StringType
 
         $this->relation = $relation;
     }
-
-    public function validateSave($value)
-    {
-        $exists = (new $this->relation)->whereId($value)->exists();
-
-        if (!$exists) {
-            throw new Error('relation #:value does not exist', compact('value'));
-        }
-    }
 }

@@ -2,7 +2,6 @@
 
 namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Str;
@@ -44,12 +43,7 @@ trait ModelRelationships
                 continue;
             }
 
-            //FIX FOR PHP 7.0
-            if (!method_exists($method->getReturnType(), 'getName')) {
-                $relationClass = $method->getReturnType()->__toString();
-            } else {
-                $relationClass = $method->getReturnType()->getName();
-            }
+            $relationClass = $method->getReturnType()->getName();
 
             if (!is_subclass_of($relationClass, Relation::class)) {
                 continue;

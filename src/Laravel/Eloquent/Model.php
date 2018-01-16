@@ -61,7 +61,7 @@ abstract class Model extends LaravelModel
 
         if ($this->hasType($key)) {
             if ($this->hasError($key)) {
-                throw new Error(':attribute error: :error', compact(':attribute', ['error' => $this->getError($key)]));
+                throw new Error(':key error: :error', ['key' => $key, 'error' => $this->getError($key)]);
             }
 
             $value = $this->attributes[$key] ?? null;
