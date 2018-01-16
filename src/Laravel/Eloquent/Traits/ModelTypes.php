@@ -314,7 +314,13 @@ trait ModelTypes
 
     protected function clearError($key)
     {
-        $this->errors = array_forget($this->errors, $key) ?? [];
+        if (isset($this->errors[$key])) {
+            unset($this->errors[$key]);
+        }
+
+        if (is_null($this->errors)) {
+            $this->errors = [];
+        }
     }
 
     protected function recordError($key, $message)

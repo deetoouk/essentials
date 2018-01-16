@@ -27,7 +27,7 @@ class ModelTest extends TestCase
         $model = new TestModel();
 
         $model->boolean    = 'on';
-        $model->integer    = '2';
+        $model->integer    = 22;
         $model->float      = '2';
         $model->string     = '2';
         $model->date       = '2017-01-02';
