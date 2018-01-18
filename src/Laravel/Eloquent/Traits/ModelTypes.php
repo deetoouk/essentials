@@ -19,15 +19,13 @@ use Throwable;
  */
 trait ModelTypes
 {
+    use ReadOnlyAttributes,
+        ErrorManagement;
+
     /**
      * @var bool
      */
     public $validates = true;
-
-    /**
-     * @var array
-     */
-    protected $errors = [];
 
     /**
      * @var array
@@ -70,6 +68,12 @@ trait ModelTypes
         }
 
         $this->types = array_merge($defaultTypes, $this->types(), $this->types);
+
+        if ($this->getReadOnly()) {
+            $this->guarded = array_merge($this->guarded, $this->getReadOnly());
+        }
+
+        $this->fillable = [];
 
         foreach ($this->types as $attribute => $type) {
             if (!in_array($attribute, $this->guarded)) {
@@ -169,9 +173,14 @@ trait ModelTypes
      * @param  mixed $value
      *
      * @return self
+     * @throws Error
      */
     public function setAttribute($key, $value)
     {
+        if (!self::isUnguarded() && $this->isReadOnly($key)) {
+            throw new Error(':key is read-only', compact('key'));
+        }
+
         $this->clearError($key);
 
         if (is_scalar($value)) {
@@ -312,41 +321,5 @@ trait ModelTypes
         }
 
         return parent::save($options);
-    }
-
-    protected function clearError($key)
-    {
-        if (isset($this->errors[$key])) {
-            unset($this->errors[$key]);
-        }
-
-        if (is_null($this->errors)) {
-            $this->errors = [];
-        }
-    }
-
-    protected function recordError($key, $message)
-    {
-        $this->errors[$key] = $message;
-    }
-
-    public function hasError($key)
-    {
-        return array_has($this->errors, $key);
-    }
-
-    public function getError($key)
-    {
-        return array_get($this->errors, $key);
-    }
-
-    public function hasErrors()
-    {
-        return !empty($this->errors);
-    }
-
-    public function getErrors()
-    {
-        return $this->errors;
     }
 }

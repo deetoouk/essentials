@@ -26,20 +26,20 @@ class ModelTest extends TestCase
     {
         $model = new TestModel();
 
-        $model->boolean    = 'on';
-        $model->integer    = 22;
-        $model->float      = '2';
-        $model->string     = '2';
-        $model->date       = '2017-01-02';
-        $model->datetime   = '2017-01-02 00:00:00';
-        $model->email      = 'jordan.dobrev.88@gmail.com';
-        $model->enumerable = 'one';
-        $model->array      = ['one'];
-        $model->object     = ['object'];
-        $model->text       = 'adat';
-        $model->url        = 'http://www.abv.bg';
-        $model->vo         = 'bgn';
-        $model->temp       = 12;
+        $model->boolean     = 'on';
+        $model->integer     = 22;
+        $model->float       = '2';
+        $model->string      = '2';
+        $model->date        = '2017-01-02';
+        $model->datetime    = '2017-01-02 00:00:00';
+        $model->email       = 'jordan.dobrev.88@gmail.com';
+        $model->enumerable  = 'one';
+        $model->array       = ['one'];
+        $model->object      = ['object'];
+        $model->text        = 'adat';
+        $model->url         = 'http://www.abv.bg';
+        $model->vo          = 'bgn';
+        $model->temp        = 12;
         $model->relation_id = '1';
 
         $this->assertInternalType('boolean', $model->boolean);
@@ -134,5 +134,29 @@ class ModelTest extends TestCase
         $this->assertNull($array['vo']);
         $this->assertNull($array['temp']);
         $this->assertNull($array['relation_id']);
+    }
+
+    /**
+     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedExceptionMessage read_only is read-only
+     */
+    public function test_read_only()
+    {
+        $model = new TestModel();
+
+        $this->assertArrayNotHasKey('read_only', $model->getFillable());
+
+        $model->read_only = '123';
+    }
+
+    public function test_allow_read_only_if_unguarded()
+    {
+        $model = new TestModel();
+
+        TestModel::unguard(true);
+
+        $model->read_only = '123';
+
+        $this->assertNotEmpty($model->read_only);
     }
 }

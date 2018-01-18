@@ -22,6 +22,8 @@ use JTDSoft\Essentials\ValueObjects\Temperature;
 
 class TestModel extends Model
 {
+    protected $readOnly = ['read_only'];
+
     public function types(): array
     {
         return [
@@ -40,6 +42,7 @@ class TestModel extends Model
             'url'         => new UrlType(),
             'vo'          => new ValueObjectType(Currency::class),
             'temp'        => new ValueObjectType(Temperature::class),
+            'read_only'   => new StringType(),
         ];
     }
 }
