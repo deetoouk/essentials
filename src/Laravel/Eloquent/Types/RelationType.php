@@ -3,7 +3,6 @@
 namespace JTDSoft\Essentials\Laravel\Eloquent\Types;
 
 use Illuminate\Database\Eloquent\Model;
-use JTDSoft\Essentials\Exceptions\Error;
 use JTDSoft\Essentials\Exceptions\Fatal;
 
 /**
@@ -15,10 +14,14 @@ class RelationType extends StringType
 {
     public $relation;
 
+    public $fieldType = null;
+
     /**
      * RelationType constructor.
      *
      * @param string|null $relation
+     *
+     * @throws Fatal
      */
     public function __construct(string $relation = null)
     {
@@ -27,6 +30,11 @@ class RelationType extends StringType
         }
     }
 
+    /**
+     * @param string $relation
+     *
+     * @throws Fatal
+     */
     public function relation(string $relation)
     {
         if (!is_subclass_of($relation, Model::class) && $relation !== Model::class) {
@@ -34,5 +42,21 @@ class RelationType extends StringType
         }
 
         $this->relation = $relation;
+    }
+
+    public function fieldType(Type $type)
+    {
+        $this->fieldType = $type;
+
+        return $this;
+    }
+
+    public function castFromPrimitive($value)
+    {
+        if ($this->fieldType) {
+            return $this->fieldType->castFromPrimitive($value);
+        }
+
+        return $value;
     }
 }
