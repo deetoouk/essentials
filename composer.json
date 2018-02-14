@@ -7,7 +7,7 @@
     "php",
     "sdk"
   ],
-  "license": "JordanDobrev",
+  "license": "MIT",
   "type": "package",
   "require": {
     "guzzlehttp/guzzle": "~6.0",
