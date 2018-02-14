@@ -20,10 +20,11 @@ class BooleanType extends Type
 
     public function castFromPrimitive($value)
     {
-        if ($value === '1') return true;
-        if ($value === 1) return true;
+        if ($value === '1' || $value === 1) {
+            return true;
+        }
 
-        return  false;
+        return false;
     }
 
     public function castToPrimitive($value)
