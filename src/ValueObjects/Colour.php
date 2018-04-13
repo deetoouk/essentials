@@ -1,8 +1,8 @@
 <?php
 
-namespace JTDSoft\Essentials\ValueObjects;
+namespace DeeToo\Essentials\ValueObjects;
 
-use JTDSoft\Essentials\Exceptions\Error;
+use DeeToo\Essentials\Exceptions\Error;
 
 /**
  * Value object class for representing colours

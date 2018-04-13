@@ -1,9 +1,9 @@
 <?php
 
-namespace JTDSoft\Essentials\ValueObjects;
+namespace DeeToo\Essentials\ValueObjects;
 
-use JTDSoft\Essentials\Exceptions\Error;
-use JTDSoft\Essentials\Services\Languages;
+use DeeToo\Essentials\Exceptions\Error;
+use DeeToo\Essentials\Services\Languages;
 
 class Language extends ValueObject
 {

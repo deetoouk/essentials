@@ -1,9 +1,9 @@
 <?php
 
-namespace JTDSoft\Essentials\ValueObjects;
+namespace DeeToo\Essentials\ValueObjects;
 
-use JTDSoft\Essentials\Exceptions\Error;
-use JTDSoft\Essentials\Currencies;
+use DeeToo\Essentials\Exceptions\Error;
+use DeeToo\Essentials\Currencies;
 
 class Currency extends ValueObject
 {

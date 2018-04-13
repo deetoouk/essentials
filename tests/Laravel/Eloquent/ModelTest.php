@@ -1,17 +1,17 @@
 <?php
 
-namespace Tests\JTDSoft\Essentials\Laravel\Eloquent\Types;
+namespace Tests\DeeToo\Essentials\Laravel\Eloquent\Types;
 
 use DateTime;
-use JTDSoft\Essentials\ValueObjects\Currency;
-use JTDSoft\Essentials\ValueObjects\Temperature;
+use DeeToo\Essentials\ValueObjects\Currency;
+use DeeToo\Essentials\ValueObjects\Temperature;
 use Tests\Illuminate\Database\Eloquent\TestModel;
 use Tests\TestCase;
 
 /**
  * Class ArrayTypeTest
  *
- * @package Tests\JTDSoft\Essentials\Laravel\Eloquent\Types
+ * @package Tests\DeeToo\Essentials\Laravel\Eloquent\Types
  */
 class ModelTest extends TestCase
 {
@@ -137,7 +137,7 @@ class ModelTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      * @expectedExceptionMessage read_only is read-only
      */
     public function test_read_only()

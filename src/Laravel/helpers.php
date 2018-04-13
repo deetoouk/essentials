@@ -10,7 +10,7 @@ if (!function_exists('validate')) {
         $validator = app('validator')->make((array)$input, $rules, $messages, $attributes);
 
         if ($validator->fails()) {
-            throw new \JTDSoft\Essentials\Exceptions\Errors($validator);
+            throw new \DeeToo\Essentials\Exceptions\Errors($validator);
         }
 
         return array_only($input ?? [], array_keys($rules));

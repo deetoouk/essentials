@@ -1,21 +1,21 @@
-<?php namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
+<?php namespace DeeToo\Essentials\Laravel\Eloquent\Traits;
 
 use DateTime;
 use Illuminate\Support\Str;
-use JTDSoft\Essentials\Exceptions\Error;
-use JTDSoft\Essentials\Exceptions\Errors;
-use JTDSoft\Essentials\Exceptions\Fatal;
-use JTDSoft\Essentials\Laravel\Eloquent\Types\DateTimeType;
-use JTDSoft\Essentials\Laravel\Eloquent\Types\IntegerType;
-use JTDSoft\Essentials\Laravel\Eloquent\Types\RelationType;
-use JTDSoft\Essentials\ValueObjects\ValueObject;
+use DeeToo\Essentials\Exceptions\Error;
+use DeeToo\Essentials\Exceptions\Errors;
+use DeeToo\Essentials\Exceptions\Fatal;
+use DeeToo\Essentials\Laravel\Eloquent\Types\DateTimeType;
+use DeeToo\Essentials\Laravel\Eloquent\Types\IntegerType;
+use DeeToo\Essentials\Laravel\Eloquent\Types\RelationType;
+use DeeToo\Essentials\ValueObjects\ValueObject;
 use stdClass;
 use Throwable;
 
 /**
  * Class ModelTypes
  *
- * @package JTDSoft\Essentials\Laravel\Eloquent\Traits
+ * @package DeeToo\Essentials\Laravel\Eloquent\Traits
  */
 trait ModelTypes
 {

@@ -1,4 +1,4 @@
-<?php namespace JTDSoft\Essentials\Exceptions;
+<?php namespace DeeToo\Essentials\Exceptions;
 
 use Exception;
 use Illuminate\Validation\Validator;

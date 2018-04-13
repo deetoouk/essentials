@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\JTDSoft\Essentials\Laravel\Eloquent\Types;
+namespace Tests\DeeToo\Essentials\Laravel\Eloquent\Types;
 
-use JTDSoft\Essentials\Laravel\Eloquent\Types\FloatType;
+use DeeToo\Essentials\Laravel\Eloquent\Types\FloatType;
 use Tests\TestCase;
 
 /**
  * Class FloatTypeTest
  *
- * @package Tests\JTDSoft\Essentials\Laravel\Eloquent\Types
+ * @package Tests\DeeToo\Essentials\Laravel\Eloquent\Types
  */
 class FloatTypeTest extends TestCase
 {
@@ -22,7 +22,7 @@ class FloatTypeTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      * @expectedExceptionMessage must be float
      */
     public function test_fails_validates()
@@ -33,7 +33,7 @@ class FloatTypeTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      * @expectedExceptionMessage cannot be more than 5
      */
     public function test_validation_fails_if_value_more_than_max()
@@ -44,7 +44,7 @@ class FloatTypeTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      * @expectedExceptionMessage cannot be less than 1
      */
     public function test_validation_fails_if_value_lass_than_min()
@@ -55,7 +55,7 @@ class FloatTypeTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      * @expectedExceptionMessage cannot be less than 0
      */
     public function test_validation_fails_if_value_lass_than_0_when_unsigned()

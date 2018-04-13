@@ -1,14 +1,14 @@
 <?php
 
-namespace JTDSoft\Essentials\Laravel\Eloquent\Types;
+namespace DeeToo\Essentials\Laravel\Eloquent\Types;
 
-use JTDSoft\Essentials\Exceptions\Error;
+use DeeToo\Essentials\Exceptions\Error;
 use Throwable;
 
 /**
  * Class Type
  *
- * @package JTDSoft\Essentials\Laravel\Eloquent\Types
+ * @package DeeToo\Essentials\Laravel\Eloquent\Types
  */
 abstract class Type
 {

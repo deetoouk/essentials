@@ -1,4 +1,4 @@
-<?php namespace JTDSoft\Essentials\Laravel\Eloquent;
+<?php namespace DeeToo\Essentials\Laravel\Eloquent;
 
 use Illuminate\Database\Eloquent\Collection as BaseCollection;
 use Illuminate\Database\Eloquent\Model;

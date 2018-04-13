@@ -1,10 +1,10 @@
 <?php
 
-namespace JTDSoft\Essentials\Utilities;
+namespace DeeToo\Essentials\Utilities;
 
 use DateTime;
-use JTDSoft\Essentials\Currencies;
-use JTDSoft\Essentials\ValueObjects\Currency;
+use DeeToo\Essentials\Currencies;
+use DeeToo\Essentials\ValueObjects\Currency;
 
 class Formatter
 {

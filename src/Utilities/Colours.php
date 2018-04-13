@@ -1,8 +1,8 @@
 <?php
 
-namespace JTDSoft\Essentials\Utilities;
+namespace DeeToo\Essentials\Utilities;
 
-use JTDSoft\Essentials\Exceptions\Error;
+use DeeToo\Essentials\Exceptions\Error;
 
 class Colours
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
+namespace DeeToo\Essentials\Laravel\Eloquent\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use JTDSoft\Essentials\Laravel\Eloquent\Types\StringType;
+use DeeToo\Essentials\Laravel\Eloquent\Types\StringType;
 
 /**
  * Class MorphedByCustomer
  *
- * @package JTDSoft\Essentials\Laravel\Eloquent\Traits
+ * @package DeeToo\Essentials\Laravel\Eloquent\Traits
  */
 trait Morphable
 {

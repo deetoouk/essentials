@@ -1,13 +1,13 @@
 <?php
 
-namespace JTDSoft\Essentials\Laravel\Eloquent\Types;
+namespace DeeToo\Essentials\Laravel\Eloquent\Types;
 
-use JTDSoft\Essentials\Exceptions\Error;
+use DeeToo\Essentials\Exceptions\Error;
 
 /**
  * Class BooleanType
  *
- * @package JTDSoft\Essentials\Laravel\Eloquent\Types
+ * @package DeeToo\Essentials\Laravel\Eloquent\Types
  */
 class BooleanType extends Type
 {

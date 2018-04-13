@@ -1,11 +1,11 @@
 <?php
 
-namespace JTDSoft\Essentials\Laravel\Eloquent\Types;
+namespace DeeToo\Essentials\Laravel\Eloquent\Types;
 
 /**
  * Class BigIntegerType
  *
- * @package JTDSoft\Essentials\Laravel\Eloquent\Types
+ * @package DeeToo\Essentials\Laravel\Eloquent\Types
  */
 class BigIntegerType extends IntegerType
 {

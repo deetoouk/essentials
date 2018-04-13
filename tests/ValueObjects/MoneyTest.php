@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\JTDSoft\Essentials\ValueObjects;
+namespace Tests\DeeToo\Essentials\ValueObjects;
 
-use JTDSoft\Essentials\ValueObjects\Currency;
-use JTDSoft\Essentials\ValueObjects\Money;
+use DeeToo\Essentials\ValueObjects\Currency;
+use DeeToo\Essentials\ValueObjects\Money;
 use Tests\TestCase;
 
 class MoneyTest extends TestCase
 {
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      */
     public function test_fails_on_invalid_value_type()
     {

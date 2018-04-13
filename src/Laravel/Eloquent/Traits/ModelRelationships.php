@@ -1,19 +1,19 @@
 <?php
 
-namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
+namespace DeeToo\Essentials\Laravel\Eloquent\Traits;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Str;
-use JTDSoft\Essentials\Exceptions\Error;
-use JTDSoft\Essentials\Laravel\Eloquent\Types\RelationType;
+use DeeToo\Essentials\Exceptions\Error;
+use DeeToo\Essentials\Laravel\Eloquent\Types\RelationType;
 use ReflectionClass;
 use ReflectionMethod;
 
 /**
  * Class ModelRelationships
  *
- * @package JTDSoft\Essentials\Laravel\Eloquent\Traits
+ * @package DeeToo\Essentials\Laravel\Eloquent\Traits
  */
 trait ModelRelationships
 {

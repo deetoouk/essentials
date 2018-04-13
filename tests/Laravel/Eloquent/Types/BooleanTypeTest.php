@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\JTDSoft\Essentials\Laravel\Eloquent\Types;
+namespace Tests\DeeToo\Essentials\Laravel\Eloquent\Types;
 
-use JTDSoft\Essentials\Laravel\Eloquent\Types\BooleanType;
+use DeeToo\Essentials\Laravel\Eloquent\Types\BooleanType;
 use Tests\TestCase;
 
 /**
  * Class BooleanTypeTest
  *
- * @package Tests\JTDSoft\Essentials\Laravel\Eloquent\Types
+ * @package Tests\DeeToo\Essentials\Laravel\Eloquent\Types
  */
 class BooleanTypeTest extends TestCase
 {
@@ -38,7 +38,7 @@ class BooleanTypeTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      * @expectedExceptionMessage default value must be boolean
      */
     public function test_invalid_default_boolean()

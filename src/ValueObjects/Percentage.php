@@ -1,8 +1,8 @@
 <?php
 
-namespace JTDSoft\Essentials\ValueObjects;
+namespace DeeToo\Essentials\ValueObjects;
 
-use JTDSoft\Essentials\Exceptions\Error;
+use DeeToo\Essentials\Exceptions\Error;
 
 class Percentage extends ValueObject
 {

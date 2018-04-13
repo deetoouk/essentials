@@ -1,9 +1,9 @@
 <?php
 
-namespace JTDSoft\Essentials\ValueObjects;
+namespace DeeToo\Essentials\ValueObjects;
 
 use JsonSerializable;
-use JTDSoft\Essentials\Exceptions\Fatal;
+use DeeToo\Essentials\Exceptions\Fatal;
 
 abstract class ValueObject implements JsonSerializable
 {

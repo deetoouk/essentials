@@ -34,11 +34,11 @@ if (!function_exists('class_uses_deep')) {
 
 if (!function_exists('format')) {
     /**
-     * @return \JTDSoft\Essentials\Utilities\Formatter
+     * @return \DeeToo\Essentials\Utilities\Formatter
      */
     function format()
     {
-        return new \JTDSoft\Essentials\Utilities\Formatter();
+        return new \DeeToo\Essentials\Utilities\Formatter();
     }
 }
 
@@ -53,7 +53,7 @@ if (!function_exists('format')) {
      */
     function flash($message = null, $title = null, $time = null, $is_html = null)
     {
-        $flash = new \JTDSoft\Essentials\Utilities\Flash();
+        $flash = new \DeeToo\Essentials\Utilities\Flash();
 
         if (func_num_args() == 0) {
             return $flash;
@@ -68,11 +68,11 @@ if (!function_exists('bark')) {
      * @param null $message
      * @param null $title
      *
-     * @return \JTDSoft\Essentials\Utilities\Bark|string
+     * @return \DeeToo\Essentials\Utilities\Bark|string
      */
     function bark($message = null, $title = null)
     {
-        $bark = new \JTDSoft\Essentials\Utilities\Bark();
+        $bark = new \DeeToo\Essentials\Utilities\Bark();
 
         if (func_num_args() == 0) {
             return $bark;

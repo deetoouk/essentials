@@ -1,11 +1,11 @@
-<?php namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
+<?php namespace DeeToo\Essentials\Laravel\Eloquent\Traits;
 
-use JTDSoft\Essentials\Laravel\Eloquent\Types\UuidType;
+use DeeToo\Essentials\Laravel\Eloquent\Types\UuidType;
 
 /**
  * Class Uuid
  *
- * @package JTDSoft\Essentials\Laravel\Eloquent\Traits
+ * @package DeeToo\Essentials\Laravel\Eloquent\Traits
  */
 trait Uuid
 {

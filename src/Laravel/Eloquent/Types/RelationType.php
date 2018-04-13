@@ -1,14 +1,14 @@
 <?php
 
-namespace JTDSoft\Essentials\Laravel\Eloquent\Types;
+namespace DeeToo\Essentials\Laravel\Eloquent\Types;
 
 use Illuminate\Database\Eloquent\Model;
-use JTDSoft\Essentials\Exceptions\Fatal;
+use DeeToo\Essentials\Exceptions\Fatal;
 
 /**
  * Class RelationType
  *
- * @package JTDSoft\Essentials\Laravel\Eloquent\Types
+ * @package DeeToo\Essentials\Laravel\Eloquent\Types
  */
 class RelationType extends StringType
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
+namespace DeeToo\Essentials\Laravel\Eloquent\Traits;
 
-use JTDSoft\Essentials\Services\Filter;
+use DeeToo\Essentials\Services\Filter;
 use ReflectionClass;
 
 /**
  * Class ModelRelationships
  *
- * @package JTDSoft\Essentials\Laravel\Eloquent\Traits
+ * @package DeeToo\Essentials\Laravel\Eloquent\Traits
  */
 trait ModelFilters
 {

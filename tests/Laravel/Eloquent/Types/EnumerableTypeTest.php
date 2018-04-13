@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\JTDSoft\Essentials\Laravel\Eloquent\Types;
+namespace Tests\DeeToo\Essentials\Laravel\Eloquent\Types;
 
-use JTDSoft\Essentials\Laravel\Eloquent\Types\EnumerableType;
+use DeeToo\Essentials\Laravel\Eloquent\Types\EnumerableType;
 use Tests\TestCase;
 
 /**
  * Class EnumerableTypeTest
  *
- * @package Tests\JTDSoft\Essentials\Laravel\Eloquent\Types
+ * @package Tests\DeeToo\Essentials\Laravel\Eloquent\Types
  */
 class EnumerableTypeTest extends TestCase
 {
@@ -22,7 +22,7 @@ class EnumerableTypeTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      * @expectedExceptionMessage invalid value
      */
     public function test_fails_validates()

@@ -1,9 +1,9 @@
-<?php namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
+<?php namespace DeeToo\Essentials\Laravel\Eloquent\Traits;
 
 /**
  * Class ReadOnlyAttributes
  *
- * @package JTDSoft\Essentials\Laravel\Eloquent\Traits
+ * @package DeeToo\Essentials\Laravel\Eloquent\Traits
  */
 trait ReadOnlyAttributes
 {

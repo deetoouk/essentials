@@ -1,6 +1,6 @@
 <?php
 
-namespace JTDSoft\Essentials\Utilities;
+namespace DeeToo\Essentials\Utilities;
 
 use Illuminate\Contracts\Pagination\Paginator;
 

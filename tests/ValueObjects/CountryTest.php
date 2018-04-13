@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\JTDSoft\Essentials\ValueObjects;
+namespace Tests\DeeToo\Essentials\ValueObjects;
 
-use JTDSoft\Essentials\ValueObjects\Country;
+use DeeToo\Essentials\ValueObjects\Country;
 use Tests\TestCase;
 
 class CountryTest extends TestCase
 {
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      */
     public function test_fails_on_invalid_value_type()
     {
@@ -16,7 +16,7 @@ class CountryTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      */
     public function test_fails_on_invalid_value()
     {
@@ -31,7 +31,7 @@ class CountryTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      */
     public function test_fails_on_invalid_iso()
     {
@@ -53,7 +53,7 @@ class CountryTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      */
     public function test_fails_on_made_up_country()
     {

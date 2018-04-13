@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\JTDSoft\Essentials\Laravel\Eloquent\Types;
+namespace Tests\DeeToo\Essentials\Laravel\Eloquent\Types;
 
-use JTDSoft\Essentials\Laravel\Eloquent\Types\IntegerType;
+use DeeToo\Essentials\Laravel\Eloquent\Types\IntegerType;
 use Tests\TestCase;
 
 /**
  * Class IntegerTypeTest
  *
- * @package Tests\JTDSoft\Essentials\Laravel\Eloquent\Types
+ * @package Tests\DeeToo\Essentials\Laravel\Eloquent\Types
  */
 class IntegerTypeTest extends TestCase
 {
@@ -22,7 +22,7 @@ class IntegerTypeTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      * @expectedExceptionMessage must be integer
      */
     public function test_fails_validates()
@@ -33,7 +33,7 @@ class IntegerTypeTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      * @expectedExceptionMessage cannot be more than 5
      */
     public function test_validation_fails_if_value_more_than_max()
@@ -44,7 +44,7 @@ class IntegerTypeTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      * @expectedExceptionMessage cannot be less than 2
      */
     public function test_validation_fails_if_value_lass_than_min()
@@ -55,7 +55,7 @@ class IntegerTypeTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      * @expectedExceptionMessage cannot be less than 0
      */
     public function test_validation_fails_if_value_lass_than_0_when_unsigned()
@@ -66,7 +66,7 @@ class IntegerTypeTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      * @expectedExceptionMessage cannot be more than 2147483647
      */
     public function test_validation_cannot_be_more_than_type_max()
@@ -77,7 +77,7 @@ class IntegerTypeTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      * @expectedExceptionMessage cannot be less than -2147483648
      */
     public function test_validation_cannot_be_lass_than_type_max()

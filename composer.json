@@ -1,5 +1,5 @@
 {
-  "name": "jtdsoft/essentials",
+  "name": "deetoo/essentials",
   "description": "Essentials By Jordan Dobrev",
   "keywords": [
     "essentials",
@@ -34,7 +34,7 @@
   },
   "autoload": {
     "psr-4": {
-      "JTDSoft\\Essentials\\": "src/"
+      "DeeToo\\Essentials\\": "src/"
     },
     "files": [
       "src/helpers.php",

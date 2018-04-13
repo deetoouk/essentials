@@ -1,11 +1,11 @@
 <?php
 
-namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
+namespace DeeToo\Essentials\Laravel\Eloquent\Traits;
 
 /**
  * Class ModelRelationships
  *
- * @package JTDSoft\Essentials\Laravel\Eloquent\Traits
+ * @package DeeToo\Essentials\Laravel\Eloquent\Traits
  */
 trait ModelDecorators
 {

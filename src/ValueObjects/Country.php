@@ -1,9 +1,9 @@
 <?php
 
-namespace JTDSoft\Essentials\ValueObjects;
+namespace DeeToo\Essentials\ValueObjects;
 
-use JTDSoft\Essentials\Countries;
-use JTDSoft\Essentials\Exceptions\Error;
+use DeeToo\Essentials\Countries;
+use DeeToo\Essentials\Exceptions\Error;
 
 class Country extends ValueObject
 {

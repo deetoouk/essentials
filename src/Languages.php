@@ -1,6 +1,6 @@
 <?php
 
-namespace JTDSoft\Essentials;
+namespace DeeToo\Essentials;
 
 class Languages
 {

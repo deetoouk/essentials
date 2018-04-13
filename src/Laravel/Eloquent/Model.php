@@ -1,18 +1,18 @@
 <?php
 
-namespace JTDSoft\Essentials\Laravel\Eloquent;
+namespace DeeToo\Essentials\Laravel\Eloquent;
 
 use Illuminate\Database\Eloquent\Model as LaravelModel;
-use JTDSoft\Essentials\Exceptions\Error;
-use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelDecorators;
-use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelFilters;
-use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelRelationships;
-use JTDSoft\Essentials\Laravel\Eloquent\Traits\ModelTypes;
+use DeeToo\Essentials\Exceptions\Error;
+use DeeToo\Essentials\Laravel\Eloquent\Traits\ModelDecorators;
+use DeeToo\Essentials\Laravel\Eloquent\Traits\ModelFilters;
+use DeeToo\Essentials\Laravel\Eloquent\Traits\ModelRelationships;
+use DeeToo\Essentials\Laravel\Eloquent\Traits\ModelTypes;
 
 /**
  * Class Base
  *
- * @package JTDSoft\Essentials\Laravel\Eloquent
+ * @package DeeToo\Essentials\Laravel\Eloquent
  */
 abstract class Model extends LaravelModel
 {

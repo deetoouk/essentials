@@ -1,12 +1,12 @@
 <?php
 
-namespace JTDSoft\Essentials\Laravel\Eloquent\Traits;
+namespace DeeToo\Essentials\Laravel\Eloquent\Traits;
 
 use DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Arr;
-use JTDSoft\Essentials\Exceptions\Fatal;
+use DeeToo\Essentials\Exceptions\Fatal;
 
 trait InsertIgnore
 {

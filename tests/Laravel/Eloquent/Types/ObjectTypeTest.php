@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\JTDSoft\Essentials\Laravel\Eloquent\Types;
+namespace Tests\DeeToo\Essentials\Laravel\Eloquent\Types;
 
-use JTDSoft\Essentials\Laravel\Eloquent\Types\ObjectType;
+use DeeToo\Essentials\Laravel\Eloquent\Types\ObjectType;
 use Tests\TestCase;
 
 /**
  * Class ObjectTypeTest
  *
- * @package Tests\JTDSoft\Essentials\Laravel\Eloquent\Types
+ * @package Tests\DeeToo\Essentials\Laravel\Eloquent\Types
  */
 class ObjectTypeTest extends TestCase
 {
@@ -48,7 +48,7 @@ class ObjectTypeTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      * @expectedExceptionMessage must be an object
      */
     public function test_fails_validates()

@@ -1,8 +1,8 @@
 <?php
 
-namespace JTDSoft\Essentials;
+namespace DeeToo\Essentials;
 
-use JTDSoft\Essentials\Exceptions\Error;
+use DeeToo\Essentials\Exceptions\Error;
 
 class Countries
 {

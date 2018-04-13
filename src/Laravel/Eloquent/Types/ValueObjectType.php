@@ -1,16 +1,16 @@
 <?php
 
-namespace JTDSoft\Essentials\Laravel\Eloquent\Types;
+namespace DeeToo\Essentials\Laravel\Eloquent\Types;
 
-use JTDSoft\Essentials\Exceptions\Error;
-use JTDSoft\Essentials\Exceptions\Fatal;
-use JTDSoft\Essentials\ValueObjects\ValueObject;
+use DeeToo\Essentials\Exceptions\Error;
+use DeeToo\Essentials\Exceptions\Fatal;
+use DeeToo\Essentials\ValueObjects\ValueObject;
 use Throwable;
 
 /**
  * Class ValueObjectType
  *
- * @package JTDSoft\Essentials\Laravel\Eloquent\Types
+ * @package DeeToo\Essentials\Laravel\Eloquent\Types
  */
 class ValueObjectType extends Type
 {

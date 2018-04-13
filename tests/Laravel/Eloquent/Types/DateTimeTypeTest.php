@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\JTDSoft\Essentials\Laravel\Eloquent\Types;
+namespace Tests\DeeToo\Essentials\Laravel\Eloquent\Types;
 
 use DateTime;
-use JTDSoft\Essentials\Laravel\Eloquent\Types\DateTimeType;
+use DeeToo\Essentials\Laravel\Eloquent\Types\DateTimeType;
 use Tests\TestCase;
 
 /**
  * Class DateTimeTypeTest
  *
- * @package Tests\JTDSoft\Essentials\Laravel\Eloquent\Types
+ * @package Tests\DeeToo\Essentials\Laravel\Eloquent\Types
  */
 class DateTimeTypeTest extends TestCase
 {
@@ -45,7 +45,7 @@ class DateTimeTypeTest extends TestCase
     }
 
     /**
-     * @expectedException \JTDSoft\Essentials\Exceptions\Error
+     * @expectedException \DeeToo\Essentials\Exceptions\Error
      * @expectedExceptionMessage must be a date time
      */
     public function test_fails_validates()
