@@ -2,6 +2,7 @@
 
 namespace DeeToo\Essentials\Laravel\Eloquent\Traits;
 
+use DeeToo\Essentials\Laravel\Eloquent\Types\RelationType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use DeeToo\Essentials\Laravel\Eloquent\Types\StringType;
@@ -18,9 +19,12 @@ trait Morphable
      */
     public $morphable = true;
 
+    /**
+     * @throws \DeeToo\Essentials\Exceptions\Fatal
+     */
     public function initMorphable()
     {
-        $this->types['model_id']   = Model::class;
+        $this->types['model_id']   = new RelationType(Model::class);
         $this->types['model_type'] = new StringType();
     }
 
