@@ -3,6 +3,7 @@
 namespace DeeToo\Essentials;
 
 use DeeToo\Essentials\Exceptions\Error;
+use ReflectionClass;
 
 class Countries
 {
@@ -22,7 +23,10 @@ class Countries
             return;
         }
 
-        self::$countries = include __DIR__ . ("/../vendor/umpirsky/country-list/data/en_GB/country.php");
+        $reflection = new ReflectionClass(\Composer\Autoload\ClassLoader::class);
+        $vendorDir = dirname(dirname($reflection->getFileName()));
+
+        self::$countries = include("{$vendorDir}/umpirsky/country-list/data/en_GB/country.php");
     }
 
     public static function existsByIso($iso)

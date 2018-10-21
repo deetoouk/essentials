@@ -50,6 +50,7 @@ class ValueObjectType extends Type
 
             new $valueObject($value);
         } catch (Throwable $e) {
+            dd($e);
             throw new Error('is invalid!');
         }
     }

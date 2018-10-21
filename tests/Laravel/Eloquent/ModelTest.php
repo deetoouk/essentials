@@ -3,8 +3,10 @@
 namespace Tests\DeeToo\Essentials\Laravel\Eloquent\Types;
 
 use DateTime;
+use DeeToo\Essentials\ValueObjects\Country;
 use DeeToo\Essentials\ValueObjects\Currency;
 use DeeToo\Essentials\ValueObjects\Temperature;
+use Illuminate\Support\Composer;
 use Tests\Illuminate\Database\Eloquent\TestModel;
 use Tests\TestCase;
 
@@ -38,6 +40,7 @@ class ModelTest extends TestCase
         $model->object      = ['object'];
         $model->text        = 'adat';
         $model->url         = 'http://www.abv.bg';
+        $model->country     = 'GB';
         $model->vo          = 'bgn';
         $model->temp        = 12;
         $model->relation_id = '1';
@@ -54,6 +57,7 @@ class ModelTest extends TestCase
         $this->assertInternalType('object', $model->object);
         $this->assertInternalType('string', $model->text);
         $this->assertInternalType('string', $model->url);
+        $this->assertInstanceOf(Country::class, $model->country);
         $this->assertInstanceOf(Currency::class, $model->vo);
         $this->assertInstanceOf(Temperature::class, $model->temp);
         $this->assertInternalType('string', $model->relation_id);
@@ -79,6 +83,7 @@ class ModelTest extends TestCase
         $this->assertInternalType('array', $array['object']);
         $this->assertInternalType('string', $array['text']);
         $this->assertInternalType('string', $array['url']);
+        $this->assertInternalType('string', $array['country']);
         $this->assertInternalType('string', $array['vo']);
         $this->assertInternalType('integer', $array['temp']);
         $this->assertInternalType('string', $array['relation_id']);
@@ -97,6 +102,7 @@ class ModelTest extends TestCase
         $model->object      = null;
         $model->text        = null;
         $model->url         = null;
+        $model->country     = null;
         $model->vo          = null;
         $model->temp        = null;
         $model->relation_id = null;
@@ -113,6 +119,7 @@ class ModelTest extends TestCase
         $this->assertNull($model->object);
         $this->assertNull($model->text);
         $this->assertNull($model->url);
+        $this->assertNull($model->country);
         $this->assertNull($model->vo);
         $this->assertNull($model->temp);
         $this->assertNull($model->relation_id);
@@ -131,6 +138,7 @@ class ModelTest extends TestCase
         $this->assertNull($array['object']);
         $this->assertNull($array['text']);
         $this->assertNull($array['url']);
+        $this->assertNull($array['country']);
         $this->assertNull($array['vo']);
         $this->assertNull($array['temp']);
         $this->assertNull($array['relation_id']);

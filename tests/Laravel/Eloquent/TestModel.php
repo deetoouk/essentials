@@ -17,6 +17,7 @@ use DeeToo\Essentials\Laravel\Eloquent\Types\StringType;
 use DeeToo\Essentials\Laravel\Eloquent\Types\TextType;
 use DeeToo\Essentials\Laravel\Eloquent\Types\UrlType;
 use DeeToo\Essentials\Laravel\Eloquent\Types\ValueObjectType;
+use DeeToo\Essentials\ValueObjects\Country;
 use DeeToo\Essentials\ValueObjects\Currency;
 use DeeToo\Essentials\ValueObjects\Temperature;
 
@@ -40,6 +41,7 @@ class TestModel extends Model
             'relation_id' => new RelationType(self::class),
             'text'        => new TextType(),
             'url'         => new UrlType(),
+            'country'     => new ValueObjectType(Country::class),
             'vo'          => new ValueObjectType(Currency::class),
             'temp'        => new ValueObjectType(Temperature::class),
             'read_only'   => new StringType(),
