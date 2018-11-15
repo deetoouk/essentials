@@ -1,4 +1,6 @@
-<?php namespace DeeToo\Essentials\Laravel\Eloquent\Traits;
+<?php
+
+namespace DeeToo\Essentials\Laravel\Eloquent\Traits;
 
 /**
  * Class ReadOnlyAttributes
