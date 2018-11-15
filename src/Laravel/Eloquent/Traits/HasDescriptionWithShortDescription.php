@@ -5,7 +5,7 @@ namespace DeeToo\Essentials\Laravel\Eloquent\Traits;
 use DeeToo\Essentials\Laravel\Eloquent\Types\TextType;
 
 /**
- * Trait HasDescription
+ * Trait HasDescriptionWithShortDescription
  *
  * @package DeeToo\Essentials\Laravel\Eloquent\Traits
  */
