@@ -30,8 +30,18 @@ abstract class Model extends LaravelModel
     {
         $this->fireModelEvent('constructing', false);
 
-        foreach (class_uses_deep($this) as $trait) {
+        $traits = class_uses_deep($this);
+
+        foreach ($traits as $trait) {
             $initMethod = 'init' . class_basename($trait);
+
+            if (method_exists($this, $initMethod)) {
+                $this->{$initMethod}();
+            }
+        }
+
+        foreach ($traits as $trait) {
+            $initMethod = 'afterInit' . class_basename($trait);
 
             if (method_exists($this, $initMethod)) {
                 $this->{$initMethod}();

@@ -58,7 +58,7 @@ trait ModelTypes
     /**
      *
      */
-    public function initModelTypes()
+    public function afterInitModelTypes()
     {
         $defaultTypes = [
             'id' => (new IntegerType())->unsigned(true),
