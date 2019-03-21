@@ -5,7 +5,6 @@ namespace DeeToo\Essentials\Laravel\Eloquent;
 use Illuminate\Database\Eloquent\Model as LaravelModel;
 use DeeToo\Essentials\Exceptions\Error;
 use DeeToo\Essentials\Laravel\Eloquent\Traits\ModelDecorators;
-use DeeToo\Essentials\Laravel\Eloquent\Traits\ModelFilters;
 use DeeToo\Essentials\Laravel\Eloquent\Traits\ModelRelationships;
 use DeeToo\Essentials\Laravel\Eloquent\Traits\ModelTypes;
 
@@ -18,7 +17,6 @@ abstract class Model extends LaravelModel
 {
     use ModelTypes,
         ModelRelationships,
-        // ModelFilters,
         ModelDecorators;
 
     /**
