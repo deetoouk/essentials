@@ -18,7 +18,7 @@ abstract class Model extends LaravelModel
 {
     use ModelTypes,
         ModelRelationships,
-        ModelFilters,
+        // ModelFilters,
         ModelDecorators;
 
     /**
