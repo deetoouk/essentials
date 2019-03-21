@@ -21,9 +21,9 @@ class Filter
      * @throws Fatal
      * @throws FilterException
      */
-    public function apply(Builder $query, iterable $availableFilter, iterable $filters): Builder
+    public function apply(Builder $query, ?iterable $availableFilter, ?iterable $filters): Builder
     {
-        if (!$filters) {
+        if (!$filters || !$availableFilter) {
             return $query;
         }
 
