@@ -1,9 +1,22 @@
 <?php namespace DeeToo\Essentials\Exceptions;
 
 use Exception;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class Error
+ *
+ * @package DeeToo\Essentials\Exceptions
+ */
 class Error extends Exception
 {
+    /**
+     * Error constructor.
+     *
+     * @param string $message
+     * @param mixed ...$params
+     */
     public function __construct($message = "", ...$params)
     {
         $code     = 0;
@@ -23,5 +36,17 @@ class Error extends Exception
         $message = __($message, $translate_parameters);
 
         parent::__construct($message, $code, $previous);
+    }
+
+    /**
+     * @return ResponseFactory|Response
+     */
+    public function render()
+    {
+        return response([
+            "message" => "The given data was invalid.",
+            "error"   => $this->message,
+            "code"    => $this->code,
+        ], 422);
     }
 }

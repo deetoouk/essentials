@@ -1,9 +1,22 @@
 <?php namespace DeeToo\Essentials\Exceptions;
 
 use Exception;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class Fatal
+ *
+ * @package DeeToo\Essentials\Exceptions
+ */
 class Fatal extends Exception
 {
+    /**
+     * Fatal constructor.
+     *
+     * @param string $message
+     * @param mixed ...$params
+     */
     public function __construct($message = "", ...$params)
     {
         $code     = 0;
@@ -23,5 +36,17 @@ class Fatal extends Exception
         $message = __($message, $translate_parameters);
 
         parent::__construct($message, $code, $previous);
+    }
+
+    /**
+     * @return ResponseFactory|Response
+     */
+    public function render()
+    {
+        return response([
+            "message" => "Server Error.",
+            "error"   => $this->message,
+            "code"    => $this->code,
+        ], 500);
     }
 }
