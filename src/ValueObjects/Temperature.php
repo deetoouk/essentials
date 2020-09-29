@@ -6,7 +6,7 @@ use DeeToo\Essentials\Exceptions\Error;
 
 class Temperature extends ValueObject
 {
-    public $serialize = [
+    public array $serialize = [
         'formatted',
         'formatted_no_decimal',
         'formatted_no_sign',
@@ -33,22 +33,22 @@ class Temperature extends ValueObject
         }
     }
 
-    public function formatted()
+    public function formatted(): string
     {
         return format()->temperature($this->value);
     }
 
-    public function formattedNoDecimal()
+    public function formattedNoDecimal(): string
     {
         return format()->temperature($this->value, false, true, false);
     }
 
-    public function formattedNoSign()
+    public function formattedNoSign(): string
     {
         return format()->temperature($this->value, true);
     }
 
-    public function formattedNoSignNoDecimal()
+    public function formattedNoSignNoDecimal(): string
     {
         return format()->temperature($this->value, true, true, false);
     }

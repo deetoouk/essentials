@@ -3,12 +3,11 @@
 namespace Tests\DeeToo\Essentials\Laravel\Eloquent\Types;
 
 use DateTime;
+use Tests\TestCase;
 use DeeToo\Essentials\ValueObjects\Country;
 use DeeToo\Essentials\ValueObjects\Currency;
 use DeeToo\Essentials\ValueObjects\Temperature;
-use Illuminate\Support\Composer;
 use Tests\Illuminate\Database\Eloquent\TestModel;
-use Tests\TestCase;
 
 /**
  * Class ArrayTypeTest
@@ -17,7 +16,7 @@ use Tests\TestCase;
  */
 class ModelTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         require_once("TestModel.php");
 
@@ -33,7 +32,7 @@ class ModelTest extends TestCase
         $model->float       = '2';
         $model->string      = '2';
         $model->date        = '2017-01-02';
-        $model->datetime    = '2017-01-02 00:00:00';
+        $model->datetime    = '2017-01-02T00:00:00.000000Z';
         $model->email       = 'jordan.dobrev.88@gmail.com';
         $model->enumerable  = 'one';
         $model->array       = ['one'];
@@ -45,48 +44,48 @@ class ModelTest extends TestCase
         $model->temp        = 12;
         $model->relation_id = '1';
 
-        $this->assertInternalType('boolean', $model->boolean);
-        $this->assertInternalType('integer', $model->integer);
-        $this->assertInternalType('float', $model->float);
-        $this->assertInternalType('string', $model->string);
+        $this->assertIsBool($model->boolean);
+        $this->assertIsInt($model->integer);
+        $this->assertIsFloat($model->float);
+        $this->assertIsString($model->string);
         $this->assertInstanceOf(DateTime::class, $model->date);
         $this->assertInstanceOf(DateTime::class, $model->datetime);
-        $this->assertInternalType('string', $model->email);
-        $this->assertInternalType('string', $model->enumerable);
-        $this->assertInternalType('array', $model->array);
-        $this->assertInternalType('object', $model->object);
-        $this->assertInternalType('string', $model->text);
-        $this->assertInternalType('string', $model->url);
+        $this->assertIsString($model->email);
+        $this->assertIsString($model->enumerable);
+        $this->assertIsArray($model->array);
+        $this->assertIsObject($model->object);
+        $this->assertIsString($model->text);
+        $this->assertIsString($model->url);
         $this->assertInstanceOf(Country::class, $model->country);
         $this->assertInstanceOf(Currency::class, $model->vo);
         $this->assertInstanceOf(Temperature::class, $model->temp);
-        $this->assertInternalType('string', $model->relation_id);
+        $this->assertIsString($model->relation_id);
 
         $relation     = new TestModel();
         $relation->id = '2';
 
         $model->relation()->associate($relation);
 
-        $this->assertInternalType('string', $model->relation_id);
+        $this->assertIsString($model->relation_id);
 
         $array = $model->toArray();
 
-        $this->assertInternalType('boolean', $array['boolean']);
-        $this->assertInternalType('integer', $array['integer']);
-        $this->assertInternalType('float', $array['float']);
-        $this->assertInternalType('string', $array['string']);
-        $this->assertInternalType('string', $array['date']);
-        $this->assertInternalType('string', $array['datetime']);
-        $this->assertInternalType('string', $array['email']);
-        $this->assertInternalType('string', $array['enumerable']);
-        $this->assertInternalType('array', $array['array']);
-        $this->assertInternalType('array', $array['object']);
-        $this->assertInternalType('string', $array['text']);
-        $this->assertInternalType('string', $array['url']);
-        $this->assertInternalType('string', $array['country']);
-        $this->assertInternalType('string', $array['vo']);
-        $this->assertInternalType('integer', $array['temp']);
-        $this->assertInternalType('string', $array['relation_id']);
+        $this->assertIsBool($array['boolean']);
+        $this->assertIsInt($array['integer']);
+        $this->assertIsFloat($array['float']);
+        $this->assertIsString($array['string']);
+        $this->assertIsString($array['date']);
+        $this->assertIsString($array['datetime']);
+        $this->assertIsString($array['email']);
+        $this->assertIsString($array['enumerable']);
+        $this->assertIsArray($array['array']);
+        $this->assertIsArray($array['object']);
+        $this->assertIsString($array['text']);
+        $this->assertIsString($array['url']);
+        $this->assertIsString($array['country']);
+        $this->assertIsString($array['vo']);
+        $this->assertIsInt($array['temp']);
+        $this->assertIsString($array['relation_id']);
 
         $model = new TestModel();
 
@@ -144,12 +143,11 @@ class ModelTest extends TestCase
         $this->assertNull($array['relation_id']);
     }
 
-    /**
-     * @expectedException \DeeToo\Essentials\Exceptions\Error
-     * @expectedExceptionMessage read_only is read-only
-     */
     public function test_read_only()
     {
+        $this->expectException(\DeeToo\Essentials\Exceptions\Error::class);
+        $this->expectExceptionMessage('read_only is read-only');
+
         $model = new TestModel();
 
         $this->assertArrayNotHasKey('read_only', $model->getFillable());

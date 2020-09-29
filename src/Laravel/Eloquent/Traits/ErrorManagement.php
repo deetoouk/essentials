@@ -2,6 +2,8 @@
 
 namespace DeeToo\Essentials\Laravel\Eloquent\Traits;
 
+use Illuminate\Support\Arr;
+
 /**
  * Class ErrorManagement
  *
@@ -12,12 +14,12 @@ trait ErrorManagement
     /**
      * @var array
      */
-    protected $errors = [];
+    protected array $errors = [];
 
     /**
      * @param $key
      */
-    protected function clearError($key)
+    protected function clearError($key): void
     {
         if (isset($this->errors[$key])) {
             unset($this->errors[$key]);
@@ -32,7 +34,7 @@ trait ErrorManagement
      * @param $key
      * @param $message
      */
-    protected function recordError($key, $message)
+    protected function recordError(string $key, string $message): void
     {
         $this->errors[$key] = $message;
     }
@@ -42,9 +44,9 @@ trait ErrorManagement
      *
      * @return bool
      */
-    public function hasError($key)
+    public function hasError(string $key): bool
     {
-        return array_has($this->errors, $key);
+        return Arr::has($this->errors, $key);
     }
 
     /**
@@ -52,15 +54,15 @@ trait ErrorManagement
      *
      * @return mixed
      */
-    public function getError($key)
+    public function getError(string $key)
     {
-        return array_get($this->errors, $key);
+        return Arr::get($this->errors, $key);
     }
 
     /**
      * @return bool
      */
-    public function hasErrors()
+    public function hasErrors(): bool
     {
         return !empty($this->errors);
     }
@@ -68,7 +70,7 @@ trait ErrorManagement
     /**
      * @return array
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }

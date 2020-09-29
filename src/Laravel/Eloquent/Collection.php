@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Collection as BaseCollection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class Collection extends BaseCollection
 {
@@ -45,7 +46,7 @@ class Collection extends BaseCollection
             $chunks = array_chunk($toDecorate, 25);
 
             foreach ($chunks as $values) {
-                $ids = array_unique(array_pluck($values, 'id'));
+                $ids = array_unique(Arr::pluck($values, 'id'));
 
                 foreach ($model::$decorators as $decorator) {
                     $values = (new $decorator)->handle($ids, $values);

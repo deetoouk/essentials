@@ -4,3 +4,4 @@
 !/.idea/codeStyles/Project.xml
 .composer.lock
 .DS_Store
+.phpunit.result.cache

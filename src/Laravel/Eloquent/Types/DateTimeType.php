@@ -2,10 +2,10 @@
 
 namespace DeeToo\Essentials\Laravel\Eloquent\Types;
 
-use Carbon\Carbon;
 use DateTime;
-use DeeToo\Essentials\Exceptions\Error;
 use Throwable;
+use Carbon\Carbon;
+use DeeToo\Essentials\Exceptions\Error;
 
 /**
  * Class DateTimeType
@@ -14,7 +14,7 @@ use Throwable;
  */
 class DateTimeType extends Type
 {
-    public static $format = 'Y-m-d H:i:s';
+    public static $format = 'Y-m-d\TH:i:s.uT';
 
     public function validate($value)
     {

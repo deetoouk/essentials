@@ -7,12 +7,12 @@ use DeeToo\Essentials\Exceptions\Error;
 
 class Country extends ValueObject
 {
-    public $serialize = [
+    public array $serialize = [
         'name',
         'iso',
     ];
 
-    protected $resolved = false;
+    protected bool $resolved = false;
 
     public function __construct($value)
     {

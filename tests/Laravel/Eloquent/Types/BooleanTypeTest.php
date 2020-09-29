@@ -37,12 +37,11 @@ class BooleanTypeTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \DeeToo\Essentials\Exceptions\Error
-     * @expectedExceptionMessage default value must be boolean
-     */
     public function test_invalid_default_boolean()
     {
+        $this->expectException(\DeeToo\Essentials\Exceptions\Error::class);
+        $this->expectExceptionMessage('default value must be boolean');
+
         $obj = new BooleanType();
 
         $obj->default('some faulty string');

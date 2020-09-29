@@ -11,6 +11,7 @@ use DeeToo\Essentials\Laravel\Eloquent\Types\DateTimeType;
 use DeeToo\Essentials\Laravel\Eloquent\Types\IntegerType;
 use DeeToo\Essentials\Laravel\Eloquent\Types\RelationType;
 use DeeToo\Essentials\ValueObjects\ValueObject;
+use Illuminate\Support\Arr;
 use stdClass;
 use Throwable;
 
@@ -110,7 +111,7 @@ trait ModelTypes
      */
     public function validate()
     {
-        $types = array_except($this->types, ['id']);
+        $types = Arr::except($this->types, ['id']);
 
         foreach ($types as $key => $type) {
             if ($this->hasError($key)) {
@@ -134,7 +135,7 @@ trait ModelTypes
             }
 
             if ($type instanceof RelationType) {
-                $relation = camel_case(Str::replaceLast('_id', '', $key));
+                $relation = Str::camel(Str::replaceLast('_id', '', $key));
 
                 $exists = $this->$relation()->exists();
 

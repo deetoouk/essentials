@@ -3,6 +3,7 @@
 namespace DeeToo\Essentials\Laravel\Eloquent\Traits;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Arr;
 
 /**
  * Class HasAddress
@@ -51,7 +52,7 @@ trait Caching
             return static::getAllCachedById()->only($id);
         }
 
-        return array_get(static::getAllCachedById(), $id);
+        return Arr::get(static::getAllCachedById(), $id);
     }
 
     public static function getAllCachedById()

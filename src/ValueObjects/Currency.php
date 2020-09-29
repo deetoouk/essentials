@@ -7,7 +7,7 @@ use DeeToo\Essentials\Currencies;
 
 class Currency extends ValueObject
 {
-    public $serialize = [
+    public array $serialize = [
         'name',
         'iso',
         'sign_utf',

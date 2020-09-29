@@ -8,11 +8,11 @@ use Tests\TestCase;
 
 class MoneyTest extends TestCase
 {
-    /**
-     * @expectedException \DeeToo\Essentials\Exceptions\Error
-     */
     public function test_fails_on_invalid_value_type()
     {
+        $this->expectException(\DeeToo\Essentials\Exceptions\Error::class);
+        $this->expectExceptionMessage('Invalid money value aba');
+
         new Money('aba');
     }
 
