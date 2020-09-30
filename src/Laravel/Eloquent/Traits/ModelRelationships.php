@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Str;
 use DeeToo\Essentials\Exceptions\Error;
 use DeeToo\Essentials\Laravel\Eloquent\Types\RelationType;
+use Illuminate\Support\Arr;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -57,7 +58,7 @@ trait ModelRelationships
                 continue;
             }
 
-            $relation = camel_case(Str::replaceLast('_id', '', $parameter));
+            $relation = Str::camel(Str::replaceLast('_id', '', $parameter));
 
             static::$relationships[static::class][$relation] = BelongsTo::class;
         }
@@ -105,7 +106,7 @@ trait ModelRelationships
     {
         //CHECK IF THIS IS A RELATION TYPE -> FK AUTOMATIC RELATION GENERATION
         if (!method_exists($this, $method) && $this->isRelation($method)) {
-            $field = snake_case($method) . '_id';
+            $field = Str::snake($method) . '_id';
             $type  = $this->getType($field);
 
             if ($type instanceof RelationType) {
@@ -124,11 +125,11 @@ trait ModelRelationships
     public function getRelationValue($key)
     {
         //CHECK IF THIS IS A RELATION TYPE -> FK AUTOMATIC RELATION GENERATION
-        $field = snake_case($key) . '_id';
+        $field = Str::snake($key) . '_id';
         $type  = $this->getType($field);
 
         if ($type instanceof RelationType) {
-            $relation = camel_case($key);
+            $relation = Str::camel($key);
 
             if (!method_exists($this, $relation)) {
                 if ($this->relationLoaded($relation)) {
@@ -186,7 +187,7 @@ trait ModelRelationships
             return $this;
         }
 
-        $relations = array_flatten($relations);
+        $relations = Arr::flatten($relations);
 
         foreach ($relations as $relation) {
             $this->validateRelation($relation);
@@ -237,7 +238,7 @@ trait ModelRelationships
             );
         }
 
-        $relations = array_flatten($relations);
+        $relations = Arr::flatten($relations);
 
         foreach ($relations as $relation) {
             $query->getModel()->validateRelation($relation);

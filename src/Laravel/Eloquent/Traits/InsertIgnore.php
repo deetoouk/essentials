@@ -6,6 +6,7 @@ use DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use DeeToo\Essentials\Exceptions\Fatal;
 
 trait InsertIgnore
@@ -69,13 +70,16 @@ trait InsertIgnore
         // the query so they are all in one huge, flattened array for execution.
         $query = $this->getConnection()->getQueryGrammar()->compileInsert($query->getQuery(), $attributes);
 
-        $query = str_replace_first('insert into', 'insert ignore into', $query);
+        $query = Str::replaceFirst('insert into', 'insert ignore into', $query);
 
         $this->getConnection()->statement(
             $query,
-            array_values(array_filter(Arr::flatten($attributes, 1), function ($binding) {
-                return !$binding instanceof Expression;
-            }))
+            array_values(
+                array_filter(
+                    Arr::flatten($attributes, 1),
+                    fn ($binding) => !$binding instanceof Expression
+                )
+            )
         );
 
         $id = $this->getConnection()->getPdo()->lastInsertId();

@@ -21,12 +21,11 @@ class EnumerableTypeTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \DeeToo\Essentials\Exceptions\Error
-     * @expectedExceptionMessage invalid value
-     */
     public function test_fails_validates()
     {
+        $this->expectException(\DeeToo\Essentials\Exceptions\Error::class);
+        $this->expectExceptionMessage('invalid value');
+
         $obj = new EnumerableType(['one', 'two']);
 
         $obj->validate('some value');

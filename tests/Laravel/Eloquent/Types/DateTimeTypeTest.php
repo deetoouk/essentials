@@ -3,8 +3,8 @@
 namespace Tests\DeeToo\Essentials\Laravel\Eloquent\Types;
 
 use DateTime;
-use DeeToo\Essentials\Laravel\Eloquent\Types\DateTimeType;
 use Tests\TestCase;
+use DeeToo\Essentials\Laravel\Eloquent\Types\DateTimeType;
 
 /**
  * Class DateTimeTypeTest
@@ -18,7 +18,7 @@ class DateTimeTypeTest extends TestCase
         $obj = new DateTimeType();
 
         $now = new DateTime();
-        $this->assertSame($obj->castToPrimitive(new $now), $now->format(DateTimeType::$format));
+        $this->assertSame($obj->castToPrimitive($now), $now->format(DateTimeType::$format));
     }
 
     public function test_cast_from_primitive()
@@ -44,12 +44,11 @@ class DateTimeTypeTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \DeeToo\Essentials\Exceptions\Error
-     * @expectedExceptionMessage must be a date time
-     */
     public function test_fails_validates()
     {
+        $this->expectException(\DeeToo\Essentials\Exceptions\Error::class);
+        $this->expectExceptionMessage('must be a date time');
+
         $obj = new DateTimeType();
 
         $obj->validate('some string');

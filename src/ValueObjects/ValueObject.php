@@ -4,12 +4,13 @@ namespace DeeToo\Essentials\ValueObjects;
 
 use JsonSerializable;
 use DeeToo\Essentials\Exceptions\Fatal;
+use Illuminate\Support\Str;
 
 abstract class ValueObject implements JsonSerializable
 {
     protected $value;
 
-    public $serialize = [];
+    public array $serialize = [];
 
     public function __construct($value)
     {
@@ -18,7 +19,7 @@ abstract class ValueObject implements JsonSerializable
 
     public function __get($key)
     {
-        $key = camel_case($key);
+        $key = Str::camel($key);
 
         if (method_exists($this, $key)) {
             return $this->{$key}();
@@ -27,7 +28,7 @@ abstract class ValueObject implements JsonSerializable
         throw new Fatal('Method :key does not exist for :class', ['key' => $key, 'class' => get_class($this)]);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string)$this->value;
     }
@@ -65,7 +66,7 @@ abstract class ValueObject implements JsonSerializable
         return $this->value !== $value;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $serialized = [];
 
@@ -78,7 +79,7 @@ abstract class ValueObject implements JsonSerializable
         return $serialized;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }

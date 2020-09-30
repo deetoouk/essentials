@@ -11,7 +11,7 @@ use DeeToo\Essentials\Exceptions\Error;
  */
 class Colour extends ValueObject
 {
-    public $serialize = [
+    public array $serialize = [
         'hex',
         'decimal',
         'hexstring',

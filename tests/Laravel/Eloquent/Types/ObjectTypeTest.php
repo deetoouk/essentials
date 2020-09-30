@@ -47,12 +47,11 @@ class ObjectTypeTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \DeeToo\Essentials\Exceptions\Error
-     * @expectedExceptionMessage must be an object
-     */
     public function test_fails_validates()
     {
+        $this->expectException(\DeeToo\Essentials\Exceptions\Error::class);
+        $this->expectExceptionMessage('must be an object');
+
         $obj = new ObjectType();
 
         $obj->validate('some string');

@@ -21,12 +21,11 @@ class EmailTypeTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \DeeToo\Essentials\Exceptions\Error
-     * @expectedExceptionMessage must be a valid email address
-     */
     public function test_fails_validates()
     {
+        $this->expectException(\DeeToo\Essentials\Exceptions\Error::class);
+        $this->expectExceptionMessage('must be a valid email address');
+
         $obj = new EmailType();
 
         $obj->validate('some string');

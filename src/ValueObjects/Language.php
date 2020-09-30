@@ -7,7 +7,7 @@ use DeeToo\Essentials\Services\Languages;
 
 class Language extends ValueObject
 {
-    public $serialize = [
+    public array $serialize = [
         'name',
         'native_name',
         'iso',

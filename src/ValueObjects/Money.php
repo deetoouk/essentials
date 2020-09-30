@@ -9,11 +9,11 @@ class Money extends ValueObject
     /**
      * @var Currency
      */
-    private $currency;
+    private Currency $currency;
 
-    public static $defaultCurrency = 'GBP';
+    public static string $defaultCurrency = 'GBP';
 
-    public $serialize = [
+    public array $serialize = [
         'in_smallest_unit',
         'formatted',
         'formatted_html',
@@ -23,7 +23,7 @@ class Money extends ValueObject
     public function __construct($value, Currency $currency = null)
     {
         if (!is_numeric($value)) {
-            throw new Error('Invalid money value :value', ['value' => $this->value]);
+            throw new Error('Invalid money value :value', ['value' => $value]);
         }
 
         parent::__construct(intval($value));

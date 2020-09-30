@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Arr;
+
 if (!function_exists('validate')) {
     function validate($input, $rules, array $messages = [], array $attributes = [])
     {
@@ -13,6 +15,6 @@ if (!function_exists('validate')) {
             throw new \DeeToo\Essentials\Exceptions\Errors($validator);
         }
 
-        return array_only($input ?? [], array_keys($rules));
+        return Arr::only($input ?? [], array_keys($rules));
     }
 }

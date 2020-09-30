@@ -47,12 +47,11 @@ class ArrayTypeTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \DeeToo\Essentials\Exceptions\Error
-     * @expectedExceptionMessage must be an array
-     */
     public function test_fails_validates()
     {
+        $this->expectException(\DeeToo\Essentials\Exceptions\Error::class);
+        $this->expectExceptionMessage('must be an array');
+
         $obj = new ArrayType();
 
         $obj->validate('some string');

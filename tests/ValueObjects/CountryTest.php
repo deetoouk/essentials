@@ -7,19 +7,19 @@ use Tests\TestCase;
 
 class CountryTest extends TestCase
 {
-    /**
-     * @expectedException \DeeToo\Essentials\Exceptions\Error
-     */
     public function test_fails_on_invalid_value_type()
     {
+        $this->expectException(\DeeToo\Essentials\Exceptions\Error::class);
+        $this->expectExceptionMessage('Invalid country value 123');
+
         new Country(123);
     }
 
-    /**
-     * @expectedException \DeeToo\Essentials\Exceptions\Error
-     */
     public function test_fails_on_invalid_value()
     {
+        $this->expectException(\DeeToo\Essentials\Exceptions\Error::class);
+        $this->expectExceptionMessage('Invalid country value AAAA');
+
         new Country('AAAA');
     }
 
@@ -30,11 +30,11 @@ class CountryTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \DeeToo\Essentials\Exceptions\Error
-     */
     public function test_fails_on_invalid_iso()
     {
+        $this->expectException(\DeeToo\Essentials\Exceptions\Error::class);
+        $this->expectExceptionMessage('Invalid country value AA');
+
         new Country('AA');
     }
 
@@ -52,11 +52,11 @@ class CountryTest extends TestCase
         $this->assertSame($country->iso(), 'BG');
     }
 
-    /**
-     * @expectedException \DeeToo\Essentials\Exceptions\Error
-     */
     public function test_fails_on_made_up_country()
     {
+        $this->expectException(\DeeToo\Essentials\Exceptions\Error::class);
+        $this->expectExceptionMessage('Invalid country value BulgaroBritania');
+
         new Country('BulgaroBritania');
     }
 

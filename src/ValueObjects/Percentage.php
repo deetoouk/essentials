@@ -6,7 +6,7 @@ use DeeToo\Essentials\Exceptions\Error;
 
 class Percentage extends ValueObject
 {
-    public $serialize = [
+    public array $serialize = [
         'formatted',
         'formatted_no_decimal',
         'formatted_no_sign',
@@ -30,22 +30,22 @@ class Percentage extends ValueObject
         }
     }
 
-    public function formatted()
+    public function formatted(): string
     {
         return format()->percent($this->value);
     }
 
-    public function formattedNoDecimal()
+    public function formattedNoDecimal(): string
     {
         return format()->percent($this->value, false, true, false);
     }
 
-    public function formattedNoSign()
+    public function formattedNoSign(): string
     {
         return format()->percent($this->value, true);
     }
 
-    public function formattedNoSignNoDecimal()
+    public function formattedNoSignNoDecimal(): string
     {
         return format()->percent($this->value, true, true, false);
     }
