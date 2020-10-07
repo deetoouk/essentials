@@ -18,7 +18,7 @@ trait Filterable
 
     /**
      * @param $query
-     * @param iterable|null $filters
+     * @param ?iterable $filters
      *
      * @return \Illuminate\Database\Eloquent\Builder
      * @throws \DeeToo\Essentials\Exceptions\Fatal

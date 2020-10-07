@@ -4,9 +4,8 @@
 
 DeeToo Essentials provides tools that enhances your Laravel experience.
 
+### Models
 The DeeToo Model provides an extra layer of validation to protect you against yourself. If validates the data before you save it to the database and verifies if a relation actually exists. It also provides nice additional features like read only properties and value objects.
-
-### Usage
 
 ```php
 <?php
@@ -140,3 +139,52 @@ class EmailType extends Type
 ```
 
 You can add options that you can chain. All you need is to validate them accordingly in the `validate` method.
+
+### Filters
+The DeeToo Filters and easy way to provide human readable api filters your Eloquent Models.
+
+```php
+<?php
+
+use DeeToo\Essentials\Laravel\Eloquent\Model;
+use DeeToo\Essentials\Laravel\Eloquent\Traits\Filterable;
+use DeeToo\Essentials\Laravel\Eloquent\Types\StringType;
+use DeeToo\Essentials\Laravel\Filters\Filters\Search;
+
+class FilterableModel extends Model
+{
+    use Filterable;
+
+    protected $readOnly = ['read_only'];
+
+    public function types(): array
+    {
+        return [
+            'name' => new StringType(),
+        ];
+    }
+    
+    public function filters(): array
+    {
+        return [
+            'search' => new Search(['name']),
+        ];
+    }
+}
+
+## USAGE
+
+$model = new FilterableModel();
+
+$model->apply(['search' => 'search_string_to_fetch_records']);
+```
+
+You can use any of the predefined filters or create your own by implementing the `FilterContract`
+
+| Filter     | Description                                    |
+|------------|------------------------------------------------|
+| Equals     | A field is equal to a value                    |
+| InArray    | A field is equal to any value in an array      |
+| NotEquals  | A field is not equal to a value                |
+| NotInArray | A field is not equal to any value in an array  |
+| Search     | A list of fields starts with a value `:value%` |

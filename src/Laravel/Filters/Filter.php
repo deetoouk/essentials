@@ -14,8 +14,8 @@ class Filter
 {
     /**
      * @param Builder $query
-     * @param iterable $availableFilter
-     * @param iterable $filters
+     * @param ?iterable $availableFilter
+     * @param ?iterable $filters
      *
      * @return Builder
      * @throws Fatal
